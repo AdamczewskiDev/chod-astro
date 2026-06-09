@@ -1,0 +1,86 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Chłopaki od dźwięku – Nagłośnienie, Oświetlenie i Multimedia na Eventy | Cała Polska',
+  description = 'Profesjonalne nagłośnienie, oświetlenie i multimedia na eventy w całej Polsce. Koncerty, konferencje, imprezy plenerowe. Darmowa wycena – tel. +48 722 880 680.',
+} = Astro.props;
+
+const site = Astro.site?.toString().replace(/\/$/, '') ?? 'https://www.chlopakioddzwieku.com';
+const ogImage =
+  'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=1200&h=630&q=80&fm=jpg';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  name: 'Chłopaki od dźwięku',
+  description:
+    'Profesjonalne nagłośnienie, oświetlenie i multimedia na eventy. Koncerty, konferencje, imprezy plenerowe w całej Polsce.',
+  telephone: '+48722880680',
+  email: 'chlopakioddzwieku@gmail.com',
+  areaServed: 'PL',
+  url: `${site}/`,
+  sameAs: [`${site}/`],
+};
+---
+
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#ffffff" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href={`${site}/`} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Chłopaki od dźwięku – Nagłośnienie i Oświetlenie na Eventy" />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={`${site}/`} />
+    <meta property="og:locale" content="pl_PL" />
+    <meta property="og:site_name" content="Chłopaki od dźwięku" />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Technika eventowa: nagłośnienie, światło, multimedia" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Chłopaki od dźwięku – Nagłośnienie i Oświetlenie na Eventy" />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Work+Sans:wght@400;600;700&display=swap"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Work+Sans:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/favicon.png" />
+
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+    <slot name="head" />
+  </head>
+  <body>
+    <slot />
+    <script>
+      import '../scripts/main.ts';
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  @import '../styles/global.css';
+</style>

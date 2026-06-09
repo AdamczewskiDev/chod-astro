@@ -1,0 +1,77 @@
+---
+const site = Astro.site?.toString().replace(/\/$/, '') ?? 'https://www.chlopakioddzwieku.com';
+---
+
+<section id="wycena" class="container border-box mt-space" aria-labelledby="wycena-heading">
+  <div class="section-header border-bottom">
+    <h2 id="wycena-heading">DARMOWA WYCENA</h2>
+  </div>
+  <div class="content-padding">
+    <form
+      id="quote-form"
+      class="quote-form"
+      method="post"
+      action="https://formsubmit.co/chlopakioddzwieku@gmail.com"
+      novalidate
+    >
+      <div class="form-grid">
+        <input type="hidden" name="_subject" value="Wycena — Chłopaki od dźwięku" />
+        <input type="hidden" name="_template" value="table" />
+        <input type="hidden" name="_captcha" value="true" />
+        <input
+          type="hidden"
+          name="_next"
+          id="q-next"
+          value={`${site}/#wycena-sent`}
+        />
+        <input
+          type="text"
+          name="_honey"
+          tabindex="-1"
+          autocomplete="off"
+          class="sr-only"
+          aria-hidden="true"
+        />
+
+        <div class="field">
+          <label for="q-name">Imię i nazwisko</label>
+          <input id="q-name" name="name" autocomplete="name" required />
+        </div>
+        <div class="field">
+          <label for="q-phone">Telefon</label>
+          <input id="q-phone" name="phone" inputmode="tel" autocomplete="tel" required />
+        </div>
+        <div class="field">
+          <label for="q-email">Email</label>
+          <input id="q-email" name="email" type="email" autocomplete="email" />
+        </div>
+        <div class="field field-full">
+          <label for="q-msg">Co i kiedy organizujesz?</label>
+          <textarea
+            id="q-msg"
+            name="message"
+            rows="5"
+            required
+            placeholder="Np. koncert / konferencja, miasto, data, liczba osób, co potrzebujesz (dźwięk/światło/multimedia)"
+          ></textarea>
+        </div>
+        <div class="field field-full checkbox-row">
+          <label class="checkbox">
+            <input id="q-consent" name="consent" type="checkbox" required />
+            <span>Wyrażam zgodę na kontakt w sprawie wyceny.</span>
+          </label>
+        </div>
+        <div class="field field-full">
+          <button class="btn-solid" type="submit">WYŚLIJ</button>
+          <p class="form-hint" id="quote-status" role="status" aria-live="polite"></p>
+          <noscript>
+            <p class="form-hint">
+              Masz wyłączony JavaScript — napisz do nas na
+              <a href="mailto:chlopakioddzwieku@gmail.com">chlopakioddzwieku@gmail.com</a>.
+            </p>
+          </noscript>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>
