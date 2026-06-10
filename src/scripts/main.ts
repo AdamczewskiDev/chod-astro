@@ -9,7 +9,13 @@ function initMinimalHeader(): void {
 
   const setVisible = (visible: boolean) => {
     minimalHeader.classList.toggle('visible', visible);
-    minimalHeader.setAttribute('aria-hidden', (!visible).toString());
+    if (visible) {
+      minimalHeader.removeAttribute('aria-hidden');
+      minimalHeader.removeAttribute('inert');
+    } else {
+      minimalHeader.setAttribute('aria-hidden', 'true');
+      minimalHeader.setAttribute('inert', '');
+    }
   };
 
   const observer = new IntersectionObserver(

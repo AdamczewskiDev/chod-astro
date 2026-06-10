@@ -4,6 +4,6 @@ export default defineConfig({
   site: 'https://www.chlopakioddzwieku.com',
   compressHTML: true,
   build: {
-    inlineStylesheets: 'auto',
+    inlineStylesheets: 'always',
   },
 });
