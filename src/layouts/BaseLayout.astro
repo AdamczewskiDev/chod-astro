@@ -1,4 +1,10 @@
 ---
+import '@fontsource/work-sans/400.css';
+import '@fontsource/work-sans/600.css';
+import '@fontsource/work-sans/700.css';
+import '@fontsource/roboto-mono/400.css';
+import '@fontsource/roboto-mono/700.css';
+
 interface Props {
   title?: string;
   description?: string;
@@ -10,8 +16,7 @@ const {
 } = Astro.props;
 
 const site = Astro.site?.toString().replace(/\/$/, '') ?? 'https://www.chlopakioddzwieku.com';
-const ogImage =
-  'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=1200&h=630&q=80&fm=jpg';
+const ogImage = `${site}/og.webp`;
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -68,18 +73,7 @@ const jsonLd = {
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="preload"
-      as="style"
-      href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Work+Sans:wght@400;600;700&display=swap"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Work+Sans:wght@400;600;700&display=swap"
-      rel="stylesheet"
-    />
-
+    <link rel="icon" type="image/webp" href="/favicon.webp" />
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/favicon.png" />
 

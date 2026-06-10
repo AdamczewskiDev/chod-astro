@@ -9,9 +9,14 @@
     "preview": "astro preview"
   },
   "dependencies": {
+    "@fontsource/roboto-mono": "^5.2.9",
+    "@fontsource/work-sans": "^5.2.8",
     "astro": "^5.7.10"
   },
   "engines": {
     "node": ">=20"
+  },
+  "devDependencies": {
+    "sharp": "^0.34.5"
   }
 }

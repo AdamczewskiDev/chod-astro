@@ -1,20 +1,27 @@
 <a href="/" class="logo" title="Strona główna">
-  <img
-    class="logo__img logo__img--light"
-    src="/logo-chod.png"
-    alt="Chłopaki od dźwięku"
-    width="160"
-    height="64"
-    decoding="async"
-  />
-  <img
-    class="logo__img logo__img--dark"
-    src="/logo-chod-dark.png"
-    alt=""
-    width="160"
-    height="64"
-    decoding="async"
-    aria-hidden="true"
-  />
+  <picture class="logo__picture logo__picture--light">
+    <source srcset="/logo-chod.webp" type="image/webp" />
+    <img
+      class="logo__img"
+      src="/logo-chod.png"
+      alt="Chłopaki od dźwięku"
+      width="160"
+      height="64"
+      decoding="async"
+      fetchpriority="high"
+    />
+  </picture>
+  <picture class="logo__picture logo__picture--dark">
+    <source srcset="/logo-chod-dark.webp" type="image/webp" />
+    <img
+      class="logo__img"
+      src="/logo-chod-dark.png"
+      alt=""
+      width="160"
+      height="64"
+      decoding="async"
+      aria-hidden="true"
+    />
+  </picture>
   <span class="sr-only">Chłopaki od dźwięku — strona główna</span>
 </a>
