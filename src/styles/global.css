@@ -21,6 +21,13 @@
 .quote-form .checkbox{display:flex;gap:.6rem;align-items:flex-start;font-weight:600;color:var(--text)}
 .quote-form .checkbox input{margin-top:.2rem;width:18px;height:18px}
 .form-hint{margin-top:.75rem;font-size:.95rem;color:var(--text-muted)}
+.field-error{min-height:1.25rem;margin-top:.35rem;font-size:.9rem;font-weight:600;color:#b91c1c}
+:root[data-theme="dark"] .field-error{color:#fca5a5}
+.quote-form .field-invalid{border-color:#b91c1c!important}
+:root[data-theme="dark"] .quote-form .field-invalid{border-color:#fca5a5!important}
+.form-status--error{margin-top:.75rem;padding:.75rem 1rem;border:2px solid #b91c1c;background:#fef2f2;color:#b91c1c;font-weight:600}
+:root[data-theme="dark"] .form-status--error{border-color:#fca5a5;background:#2a1212;color:#fca5a5}
+.form-status--success{margin-top:.75rem;padding:.75rem 1rem;border:2px solid var(--brand);background:var(--bg-muted);color:var(--text);font-weight:600}
 
 @media (min-width:600px){.quote-form .form-grid{grid-template-columns:1fr 1fr}.quote-form .field-full{grid-column:1 / -1}}
 

@@ -1,3 +1,5 @@
+import { initQuoteForm } from './quote-form';
+
 function initMinimalHeader(): void {
   const minimalHeader = document.getElementById('header-minimal');
   const hero = document.getElementById('hero');
@@ -25,47 +27,6 @@ function initMinimalHeader(): void {
     if (e.matches) setVisible(false);
   });
   if (mediaQuery.matches) setVisible(false);
-}
-
-function initQuoteForm(): void {
-  const form = document.getElementById('quote-form');
-  if (!form) return;
-
-  const status = document.getElementById('quote-status');
-  const nextInput = document.getElementById('q-next') as HTMLInputElement | null;
-
-  if (nextInput) {
-    nextInput.value = `${location.origin}${location.pathname}#wycena-sent`;
-  }
-
-  if (location.hash === '#wycena-sent') {
-    if (status) {
-      status.textContent =
-        'Wiadomość została wysłana. Odezwiemy się najszybciej jak to możliwe.';
-    }
-    history.replaceState(null, '', `${location.pathname}#wycena`);
-  }
-
-  if (location.search) {
-    history.replaceState(null, '', location.pathname + location.hash);
-  }
-
-  form.addEventListener('submit', (event) => {
-    if (status) status.textContent = '';
-
-    const name = (form.querySelector('#q-name') as HTMLInputElement)?.value.trim() || '';
-    const phone = (form.querySelector('#q-phone') as HTMLInputElement)?.value.trim() || '';
-    const message = (form.querySelector('#q-msg') as HTMLTextAreaElement)?.value.trim() || '';
-    const consent = (form.querySelector('#q-consent') as HTMLInputElement)?.checked;
-
-    if (!name || !phone || !message || !consent) {
-      event.preventDefault();
-      form.reportValidity();
-      return;
-    }
-
-    if (status) status.textContent = 'Wysyłanie...';
-  });
 }
 
 initMinimalHeader();

@@ -33,17 +33,47 @@ const site = Astro.site?.toString().replace(/\/$/, '') ?? 'https://www.chlopakio
           aria-hidden="true"
         />
 
+        <input type="hidden" name="_replyto" id="q-replyto" value="" />
+
         <div class="field">
           <label for="q-name">Imię i nazwisko</label>
-          <input id="q-name" name="name" autocomplete="name" required />
+          <input
+            id="q-name"
+            name="name"
+            type="text"
+            autocomplete="name"
+            maxlength="120"
+            placeholder="Np. Jan Kowalski"
+            aria-describedby="q-name-error"
+          />
+          <p class="field-error" id="q-name-error" role="alert"></p>
         </div>
         <div class="field">
           <label for="q-phone">Telefon</label>
-          <input id="q-phone" name="phone" inputmode="tel" autocomplete="tel" required />
+          <input
+            id="q-phone"
+            name="phone"
+            type="tel"
+            inputmode="tel"
+            autocomplete="tel"
+            maxlength="20"
+            placeholder="Np. +48 600 000 000"
+            aria-describedby="q-phone-error"
+          />
+          <p class="field-error" id="q-phone-error" role="alert"></p>
         </div>
         <div class="field">
           <label for="q-email">Email</label>
-          <input id="q-email" name="email" type="email" autocomplete="email" />
+          <input
+            id="q-email"
+            name="email"
+            type="email"
+            autocomplete="email"
+            maxlength="254"
+            placeholder="Np. jan.kowalski@example.com"
+            aria-describedby="q-email-error"
+          />
+          <p class="field-error" id="q-email-error" role="alert"></p>
         </div>
         <div class="field field-full">
           <label for="q-msg">Co i kiedy organizujesz?</label>
@@ -51,15 +81,22 @@ const site = Astro.site?.toString().replace(/\/$/, '') ?? 'https://www.chlopakio
             id="q-msg"
             name="message"
             rows="5"
-            required
             placeholder="Np. koncert / konferencja, miasto, data, liczba osób, co potrzebujesz (dźwięk/światło/multimedia)"
+            aria-describedby="q-msg-error"
           ></textarea>
+          <p class="field-error" id="q-msg-error" role="alert"></p>
         </div>
         <div class="field field-full checkbox-row">
           <label class="checkbox">
-            <input id="q-consent" name="consent" type="checkbox" required />
+            <input
+              id="q-consent"
+              name="consent"
+              type="checkbox"
+              aria-describedby="q-consent-error"
+            />
             <span>Wyrażam zgodę na kontakt w sprawie wyceny.</span>
           </label>
+          <p class="field-error" id="q-consent-error" role="alert"></p>
         </div>
         <div class="field field-full">
           <button class="btn-solid" type="submit">WYŚLIJ</button>
