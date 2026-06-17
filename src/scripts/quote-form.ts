@@ -1,3 +1,5 @@
+const FORM_ACTION = 'https://formsubmit.co/ajax/chlopakioddzwieku@gmail.com';
+
 const MESSAGES = {
   name: 'Podaj imię i nazwisko (min. 2 znaki).',
   phone: 'Podaj poprawny numer telefonu (min. 9 cyfr).',
@@ -5,6 +7,10 @@ const MESSAGES = {
   message: 'Opisz wydarzenie (min. 10 znaków).',
   consent: 'Zaznacz zgodę na kontakt w sprawie wyceny.',
   summary: (count: number) => `Uzupełnij poprawnie ${count} pól oznaczonych na czerwono.`,
+  sending: 'Wysyłanie...',
+  success: 'Wiadomość została wysłana. Odezwiemy się najszybciej jak to możliwe.',
+  error:
+    'Nie udało się wysłać formularza. Spróbuj ponownie lub napisz na chlopakioddzwieku@gmail.com.',
 } as const;
 
 function normalizeEmail(value: string): string {
@@ -27,11 +33,20 @@ type FormField = {
   validate: () => string | null;
 };
 
+function showSuccess(status: HTMLElement, form: HTMLFormElement): void {
+  status.textContent = MESSAGES.success;
+  status.classList.remove('form-status--error');
+  status.classList.add('form-status--success');
+  form.reset();
+  status.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
 export function initQuoteForm(): void {
   const form = document.getElementById('quote-form') as HTMLFormElement | null;
   if (!form) return;
 
   const status = document.getElementById('quote-status');
+  const submitButton = form.querySelector('button[type="submit"]') as HTMLButtonElement | null;
   const nextInput = document.getElementById('q-next') as HTMLInputElement | null;
   const replyToInput = document.getElementById('q-replyto') as HTMLInputElement | null;
   const nameInput = form.querySelector('#q-name') as HTMLInputElement | null;
@@ -105,12 +120,8 @@ export function initQuoteForm(): void {
     nextInput.value = `${location.origin}${location.pathname}#wycena-sent`;
   }
 
-  if (location.hash === '#wycena-sent') {
-    if (status) {
-      status.textContent =
-        'Wiadomość została wysłana. Odezwiemy się najszybciej jak to możliwe.';
-      status.classList.add('form-status--success');
-    }
+  if (location.hash === '#wycena-sent' && status) {
+    showSuccess(status, form);
     history.replaceState(null, '', `${location.pathname}#wycena`);
   }
 
@@ -118,7 +129,7 @@ export function initQuoteForm(): void {
     history.replaceState(null, '', location.pathname + location.hash);
   }
 
-  form.addEventListener('submit', (event) => {
+  form.addEventListener('submit', async (event) => {
     event.preventDefault();
     clearAllErrors();
 
@@ -143,11 +154,32 @@ export function initQuoteForm(): void {
     const email = normalizeEmail(emailInput?.value || '');
     if (emailInput) emailInput.value = email;
     if (replyToInput) replyToInput.value = email;
-    if (status) {
-      status.textContent = 'Wysyłanie...';
-      status.classList.remove('form-status--error');
-    }
 
-    form.submit();
+    if (status) {
+      status.textContent = MESSAGES.sending;
+      status.classList.remove('form-status--error', 'form-status--success');
+    }
+    if (submitButton) submitButton.disabled = true;
+
+    try {
+      const response = await fetch(FORM_ACTION, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { Accept: 'application/json' },
+      });
+
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+      if (status) showSuccess(status, form);
+    } catch {
+      if (status) {
+        status.textContent = MESSAGES.error;
+        status.classList.remove('form-status--success');
+        status.classList.add('form-status--error');
+        status.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    } finally {
+      if (submitButton) submitButton.disabled = false;
+    }
   });
 }
