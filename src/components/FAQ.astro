@@ -1,0 +1,21 @@
+---
+import { faq } from '../data/content';
+---
+
+<section id={faq.id} class="container border-box mt-space" aria-labelledby="faq-heading">
+  <div class="section-header border-bottom">
+    <h2 id="faq-heading">{faq.title.toUpperCase()}</h2>
+  </div>
+  <div class="content-padding faq-list">
+    {
+      faq.items.map((item, index) => (
+        <details class="faq-item" open={index === 0}>
+          <summary>
+            <span>{item.question}</span>
+          </summary>
+          <p>{item.answer}</p>
+        </details>
+      ))
+    }
+  </div>
+</section>

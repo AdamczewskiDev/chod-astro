@@ -1,0 +1,34 @@
+---
+import { portfolio } from '../data/content';
+---
+
+<section id={portfolio.id} class="container mt-space" aria-labelledby="portfolio-heading">
+  <div class="section-header border-box mb-space">
+    <h2 id="portfolio-heading">{portfolio.title.toUpperCase()}</h2>
+  </div>
+
+  <div class="grid-3">
+    {
+      portfolio.items.map((item) => (
+        <article class="portfolio-card border-box">
+          <div class="portfolio-thumb" aria-hidden="true" style={`background-color: ${item.color}`}>
+            <span class="portfolio-thumb-label">{item.category}</span>
+          </div>
+          <div class="content-padding">
+            <span class="portfolio-category">{item.category}</span>
+            <h3>{item.title}</h3>
+            <p>{item.description}</p>
+            <ul class="portfolio-tags">
+              {item.tags.map((tag) => (
+                <li>{tag}</li>
+              ))
+              }
+            </ul>
+          </div>
+        </article>
+      ))
+    }
+  </div>
+
+  <p class="portfolio-social-note text-center mt-space">{portfolio.socialNote}</p>
+</section>

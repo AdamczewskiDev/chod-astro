@@ -4,3 +4,6 @@ dist/
 .DS_Store
 .env
 .env.*
+.agents/
+_bmad/
+_bmad-output/

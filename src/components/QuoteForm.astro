@@ -1,28 +1,26 @@
 ---
-const site = Astro.site?.toString().replace(/\/$/, '') ?? 'https://www.chlopakioddzwieku.com';
+import { site, quoteForm } from '../data/content';
+
+const siteUrl = site.baseUrl;
+const nextUrl = `${siteUrl}/${quoteForm.successAnchor}`;
 ---
 
-<section id="wycena" class="container border-box mt-space" aria-labelledby="wycena-heading">
+<section id={quoteForm.id} class="container border-box mt-space" aria-labelledby="wycena-heading">
   <div class="section-header border-bottom">
-    <h2 id="wycena-heading">DARMOWA WYCENA</h2>
+    <h2 id="wycena-heading">{quoteForm.title.toUpperCase()}</h2>
   </div>
   <div class="content-padding">
     <form
       id="quote-form"
       class="quote-form"
       method="post"
-      action="https://formsubmit.co/ajax/chlopakioddzwieku@gmail.com"
+      action={`https://formsubmit.co/ajax/${quoteForm.email}`}
       novalidate
     >
       <div class="form-grid">
-        <input type="hidden" name="_subject" value="Wycena — Chłopaki od dźwięku" />
-        <input type="hidden" name="_template" value="table" />
-        <input
-          type="hidden"
-          name="_next"
-          id="q-next"
-          value={`${site}/#wycena-sent`}
-        />
+        <input type="hidden" name="_subject" value={quoteForm.subject} />
+        <input type="hidden" name="_template" value={quoteForm.template} />
+        <input type="hidden" name="_next" id="q-next" value={nextUrl} />
         <input
           type="text"
           name="_honey"
@@ -35,52 +33,52 @@ const site = Astro.site?.toString().replace(/\/$/, '') ?? 'https://www.chlopakio
         <input type="hidden" name="_replyto" id="q-replyto" value="" />
 
         <div class="field">
-          <label for="q-name">Imię i nazwisko</label>
+          <label for="q-name">{quoteForm.fields.name.label}</label>
           <input
             id="q-name"
             name="name"
             type="text"
-            autocomplete="name"
+            autocomplete={quoteForm.fields.name.autocomplete}
             maxlength="120"
-            placeholder="Np. Jan Kowalski"
+            placeholder={quoteForm.fields.name.placeholder}
             aria-describedby="q-name-error"
           />
           <p class="field-error" id="q-name-error" role="alert"></p>
         </div>
         <div class="field">
-          <label for="q-phone">Telefon</label>
+          <label for="q-email">{quoteForm.fields.email.label}</label>
+          <input
+            id="q-email"
+            name="email"
+            type="email"
+            autocomplete={quoteForm.fields.email.autocomplete}
+            maxlength="254"
+            placeholder={quoteForm.fields.email.placeholder}
+            aria-describedby="q-email-error"
+          />
+          <p class="field-error" id="q-email-error" role="alert"></p>
+        </div>
+        <div class="field">
+          <label for="q-phone">{quoteForm.fields.phone.label}</label>
           <input
             id="q-phone"
             name="phone"
             type="tel"
             inputmode="tel"
-            autocomplete="tel"
+            autocomplete={quoteForm.fields.phone.autocomplete}
             maxlength="20"
-            placeholder="Np. +48 600 000 000"
+            placeholder={quoteForm.fields.phone.placeholder}
             aria-describedby="q-phone-error"
           />
           <p class="field-error" id="q-phone-error" role="alert"></p>
         </div>
-        <div class="field">
-          <label for="q-email">Email</label>
-          <input
-            id="q-email"
-            name="email"
-            type="email"
-            autocomplete="email"
-            maxlength="254"
-            placeholder="Np. jan.kowalski@example.com"
-            aria-describedby="q-email-error"
-          />
-          <p class="field-error" id="q-email-error" role="alert"></p>
-        </div>
         <div class="field field-full">
-          <label for="q-msg">Co i kiedy organizujesz?</label>
+          <label for="q-msg">{quoteForm.fields.message.label}</label>
           <textarea
             id="q-msg"
             name="message"
             rows="5"
-            placeholder="Np. koncert / konferencja, miasto, data, liczba osób, co potrzebujesz (dźwięk/światło/multimedia)"
+            placeholder={quoteForm.fields.message.placeholder}
             aria-describedby="q-msg-error"
           ></textarea>
           <p class="field-error" id="q-msg-error" role="alert"></p>
@@ -93,17 +91,17 @@ const site = Astro.site?.toString().replace(/\/$/, '') ?? 'https://www.chlopakio
               type="checkbox"
               aria-describedby="q-consent-error"
             />
-            <span>Wyrażam zgodę na kontakt w sprawie wyceny.</span>
+            <span>{quoteForm.consentText}</span>
           </label>
           <p class="field-error" id="q-consent-error" role="alert"></p>
         </div>
         <div class="field field-full">
-          <button class="btn-solid" type="submit">WYŚLIJ</button>
+          <button class="btn-solid" type="submit">{quoteForm.submitText.toUpperCase()}</button>
           <p class="form-hint" id="quote-status" role="status" aria-live="polite"></p>
           <noscript>
             <p class="form-hint">
-              Masz wyłączony JavaScript — napisz do nas na
-              <a href="mailto:chlopakioddzwieku@gmail.com">chlopakioddzwieku@gmail.com</a>.
+              {quoteForm.noscriptText}
+              <a href={`mailto:${quoteForm.email}`}>{quoteForm.email}</a>.
             </p>
           </noscript>
         </div>

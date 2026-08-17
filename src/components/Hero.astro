@@ -1,12 +1,19 @@
-<section id="hero" class="container border-box mt-header" aria-labelledby="hero-heading">
+---
+import { hero } from '../data/content';
+---
+
+<section id={hero.id} class="container border-box mt-header" aria-labelledby="hero-heading">
   <div class="hero-content">
-    <h1 id="hero-heading">Twoje wydarzenie, nasza technika.</h1>
-    <p>
-      Profesjonalne nagłośnienie, oświetlenie i multimedia na najwyższym poziomie. Działamy na
-      terenie całej Polski.
-    </p>
-    <a href="#wycena" class="btn-solid" title="Przejdź do formularza darmowej wyceny">
-      DARMOWA WYCENA
-    </a>
+    <span class="hero-brand">{hero.brandText}</span>
+    <h1 id="hero-heading">{hero.title}</h1>
+    <p>{hero.lead}</p>
+    <div class="hero-actions">
+      <a href={hero.ctaHref} class="btn-solid" title="Przejdź do sekcji kontaktowej">
+        {hero.ctaText.toUpperCase()}
+      </a>
+      <a href={hero.phoneCtaHref} class="btn-solid" title="Zadzwoń do nas teraz">
+        {hero.phoneCtaText.toUpperCase()}
+      </a>
+    </div>
   </div>
 </section>

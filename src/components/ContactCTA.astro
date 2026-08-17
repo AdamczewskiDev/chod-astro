@@ -1,0 +1,34 @@
+---
+import { cta } from '../data/content';
+
+const hasHref = (note: { href?: string }): note is { href: string } => Boolean(note.href);
+---
+
+<section id={cta.id} class="container mt-space" aria-labelledby="cta-heading">
+  <div class="cta-layout">
+    <div class="cta-box border-box content-padding">
+      <h2 id="cta-heading">{cta.title.toUpperCase()}</h2>
+      <p>{cta.lead}</p>
+      <a href={cta.ctaHref} class="btn-solid" title="Przejdź do formularza wyceny">
+        {cta.ctaText.toUpperCase()}
+      </a>
+    </div>
+    <aside class="cta-side-notes" aria-label="Szybki kontakt">
+      {
+        cta.sideNotes.map((note) =>
+          hasHref(note) ? (
+            <p class="cta-side-note border-box">
+              <strong>{note.title}</strong>
+              <a href={note.href}>{note.text}</a>
+            </p>
+          ) : (
+            <p class="cta-side-note border-box">
+              <strong>{note.title}</strong>
+              <span>{note.text}</span>
+            </p>
+          ),
+        )
+      }
+    </aside>
+  </div>
+</section>

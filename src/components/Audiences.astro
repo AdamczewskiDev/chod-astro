@@ -1,0 +1,23 @@
+---
+import { audiences, iconMap } from '../data/content';
+---
+
+<section id={audiences.id} class="container mt-space" aria-labelledby="audiences-heading">
+  <div class="section-header border-box mb-space">
+    <h2 id="audiences-heading">{audiences.title.toUpperCase()}</h2>
+  </div>
+
+  <div class="grid-3">
+    {
+      audiences.items.map((audience) => (
+        <article class="audience-card border-box">
+          <span class="audience-icon" aria-hidden="true">
+            {iconMap[audience.icon] ?? '✦'}
+          </span>
+          <h3>{audience.title}</h3>
+          <p>{audience.description}</p>
+        </article>
+      ))
+    }
+  </div>
+</section>

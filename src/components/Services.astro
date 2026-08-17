@@ -1,33 +1,16 @@
 ---
-import { services } from '../data/services';
+import { services } from '../data/content';
 ---
 
-<section id="uslugi" class="container mt-space">
-  <div class="section-header border-box mb-space">
-    <h2>NASZA SPECJALIZACJA</h2>
+<section id={services.id} class="container border-box mt-space">
+  <div class="section-header">
+    <h2>{services.title.toUpperCase()}</h2>
   </div>
-
-  <div class="grid-3">
-    {
-      services.map((service) => (
-        <article class="service-item border-box">
-          <div class="img-wrapper border-bottom">
-            <img
-              src={service.image}
-              alt={service.alt}
-              loading="lazy"
-              decoding="async"
-              width="600"
-              height="375"
-              sizes="(min-width: 900px) 33vw, 100vw"
-            />
-          </div>
-          <div class="content-padding">
-            <h3>{service.title}</h3>
-            <p>{service.description}</p>
-          </div>
-        </article>
-      ))
-    }
+  <div class="content-padding services-content">
+    <p class="services-intro">{services.intro}</p>
+    <ul class="services-list">
+      {services.list.map((item) => <li>{item}</li>)}
+    </ul>
+    <p class="services-closing">{services.closingNote}</p>
   </div>
 </section>
