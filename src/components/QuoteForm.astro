@@ -7,7 +7,7 @@ const nextUrl = `${siteUrl}/${quoteForm.successAnchor}`;
 
 <section id={quoteForm.id} class="container border-box mt-space" aria-labelledby="wycena-heading">
   <div class="section-header border-bottom">
-    <h2 id="wycena-heading">{quoteForm.title.toUpperCase()}</h2>
+    <h2 id="wycena-heading">{quoteForm.title}</h2>
   </div>
   <div class="content-padding">
     <form
@@ -96,7 +96,7 @@ const nextUrl = `${siteUrl}/${quoteForm.successAnchor}`;
           <p class="field-error" id="q-consent-error" role="alert"></p>
         </div>
         <div class="field field-full">
-          <button class="btn-solid" type="submit">{quoteForm.submitText.toUpperCase()}</button>
+          <button class="btn-solid" type="submit">{quoteForm.submitText}</button>
           <p class="form-hint" id="quote-status" role="status" aria-live="polite"></p>
           <noscript>
             <p class="form-hint">

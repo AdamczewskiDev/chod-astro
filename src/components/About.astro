@@ -4,7 +4,7 @@ import { about } from '../data/content';
 
 <section id={about.id} class="container border-box mt-space">
   <div class="section-header">
-    <h2>{about.title.toUpperCase()}</h2>
+    <h2>{about.title}</h2>
   </div>
   <div class="content-padding">
     {about.paragraphs.map((paragraph) => <p>{paragraph}</p>)}

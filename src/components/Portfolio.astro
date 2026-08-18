@@ -4,14 +4,14 @@ import { portfolio } from '../data/content';
 
 <section id={portfolio.id} class="container mt-space" aria-labelledby="portfolio-heading">
   <div class="section-header border-box mb-space">
-    <h2 id="portfolio-heading">{portfolio.title.toUpperCase()}</h2>
+    <h2 id="portfolio-heading">{portfolio.title}</h2>
   </div>
 
   <div class="grid-3">
     {
       portfolio.items.map((item) => (
         <article class="portfolio-card border-box">
-          <div class="portfolio-thumb" aria-hidden="true" style={`background-color: ${item.color}`}>
+          <div class={`portfolio-thumb portfolio-thumb--${item.theme}`} aria-hidden="true">
             <span class="portfolio-thumb-label">{item.category}</span>
           </div>
           <div class="content-padding">
