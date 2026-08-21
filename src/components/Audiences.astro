@@ -1,5 +1,5 @@
 ---
-import { audiences, iconMap } from '../data/content';
+import { audiences } from '../data/content';
 ---
 
 <section id={audiences.id} class="container mt-space" aria-labelledby="audiences-heading">
@@ -11,9 +11,6 @@ import { audiences, iconMap } from '../data/content';
     {
       audiences.items.map((audience) => (
         <article class="audience-card border-box">
-          <span class="audience-icon" aria-hidden="true">
-            {iconMap[audience.icon] ?? '✦'}
-          </span>
           <h3>{audience.title}</h3>
           <p>{audience.description}</p>
         </article>

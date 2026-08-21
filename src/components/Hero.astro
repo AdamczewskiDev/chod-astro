@@ -4,11 +4,11 @@ import { hero } from '../data/content';
 
 <section id={hero.id} class="container border-box mt-header" aria-labelledby="hero-heading">
   <div class="hero-content">
-    <span class="hero-brand">{hero.brandText}</span>
-    <h1 id="hero-heading">{hero.title}</h1>
+    <h1 id="hero-heading" class="hero-brand">{hero.brandText}</h1>
+    <p class="hero-tagline">{hero.title}</p>
     <p>{hero.lead}</p>
     <div class="hero-actions">
-      <a href={hero.ctaHref} class="btn-solid" title="Przejdź do sekcji kontaktowej">
+      <a href={hero.ctaHref} class="btn-solid" title="Przejdź do formularza">
         {hero.ctaText}
       </a>
       <a href={hero.phoneCtaHref} class="btn-solid" title="Zadzwoń do nas teraz">

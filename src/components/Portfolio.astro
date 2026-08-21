@@ -1,5 +1,5 @@
 ---
-import { portfolio } from '../data/content';
+import { site, portfolio } from '../data/content';
 ---
 
 <section id={portfolio.id} class="container mt-space" aria-labelledby="portfolio-heading">
@@ -11,7 +11,7 @@ import { portfolio } from '../data/content';
     {
       portfolio.items.map((item) => (
         <article class="portfolio-card border-box">
-          <div class={`portfolio-thumb portfolio-thumb--${item.theme}`} aria-hidden="true">
+          <div class="portfolio-thumb" aria-hidden="true">
             <span class="portfolio-thumb-label">{item.category}</span>
           </div>
           <div class="content-padding">
@@ -21,8 +21,7 @@ import { portfolio } from '../data/content';
             <ul class="portfolio-tags">
               {item.tags.map((tag) => (
                 <li>{tag}</li>
-              ))
-              }
+              ))}
             </ul>
           </div>
         </article>
@@ -30,5 +29,26 @@ import { portfolio } from '../data/content';
     }
   </div>
 
-  <p class="portfolio-social-note text-center mt-space">{portfolio.socialNote}</p>
+  <p class="portfolio-social-note text-center mt-space">
+    {portfolio.socialPrefix}{' '}
+    {
+      site.facebook ? (
+        <a href={site.facebook} rel="noopener noreferrer" target="_blank">
+          {portfolio.facebookLabel}
+        </a>
+      ) : (
+        <span>{portfolio.facebookLabel}</span>
+      )
+    }
+    {' / '}
+    {
+      site.instagram ? (
+        <a href={site.instagram} rel="noopener noreferrer" target="_blank">
+          {portfolio.instagramLabel}
+        </a>
+      ) : (
+        <span>{portfolio.instagramLabel}</span>
+      )
+    }
+  </p>
 </section>

@@ -12,7 +12,7 @@ function getSystemTheme(): Theme {
 }
 
 export function getTheme(): Theme {
-  return getStoredTheme() ?? 'dark';
+  return getStoredTheme() ?? 'light';
 }
 
 export function applyTheme(theme: Theme): void {
@@ -20,7 +20,7 @@ export function applyTheme(theme: Theme): void {
   localStorage.setItem(STORAGE_KEY, theme);
 
   const meta = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]');
-  if (meta) meta.content = theme === 'dark' ? '#121212' : '#ffffff';
+  if (meta) meta.content = theme === 'dark' ? '#111111' : '#F5F5F5';
 }
 
 function updateToggleState(): void {

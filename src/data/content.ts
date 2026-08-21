@@ -5,10 +5,9 @@
 // Nie musisz edytować komponentów Astro.
 //
 // TODO dla użytkownika:
-//  - uzupełnij `hero.years` (obecnie "X")
-//  - uzupełnij `cta.contactName` przy telefonie (obecnie "Imię i nazwisko")
+//  - uzupełnij `site.facebook` i `site.instagram` prawdziwymi adresami profili
+//  - uzupełnij `site.facebook` i `site.instagram` prawdziwymi adresami profili
 //  - podmień logotypy w sekcji `clients` na prawdziwe nazwy klientów
-//  - podmień zdjęcia w sekcji `portfolio` na prawdziwe realizacje
 // ─────────────────────────────────────────────────────────────────────────────
 
 export const site = {
@@ -17,16 +16,18 @@ export const site = {
   phone: '+48722880680',
   phoneDisplay: '+48 722 880 680',
   email: 'chlopakioddzwieku@gmail.com',
+  facebook: '',
+  instagram: '',
   year: 2026,
 } as const;
 
 export const meta = {
   title: 'Chłopaki od dźwięku – Partner Techniczny Wydarzeń | Cała Polska',
   description:
-    'Przejmujemy odpowiedzialność za stronę techniczną wydarzeń. Nagłośnienie, oświetlenie, scenotechnika, multimedia i koordynacja realizacji.',
+    'Bierzemy pełną odpowiedzialność za techniczną stronę imprez. Dźwięk, światło, scena, ekrany i obsługa na miejscu — w całej Polsce.',
   ogTitle: 'Chłopaki od dźwięku – Partner Techniczny Wydarzeń',
   ogDescription:
-    'Wydarzenia miejskie, eventy firmowe, sceny festiwalowe. Ty organizujesz, my odpowiadamy za technikę.',
+    'Projekty miejskie, eventy firmowe i sceny festiwalowe. Ty skupiasz się na organizacji, my na sprzęcie.',
   ogImageAlt: 'Partner techniczny wydarzeń: nagłośnienie, światło, scena',
 } as const;
 
@@ -40,11 +41,11 @@ export const navigation = [
 
 export const hero = {
   id: 'hero',
-  brandText: 'CHŁOPAKI OD DŹWIĘKU',
-  title: 'PARTNER TECHNICZNY WYDARZEŃ',
-  lead: 'Przejmujemy odpowiedzialność za tech. stronę wydarzeń — od koncepcji po realizację. Obsługujemy wydarzenia miejskie, eventy firmowe i sceny festiwalowe, dzięki czemu organizatorzy mogą skupić się na wydarzeniu zamiast na technice.',
-  ctaText: 'Porozmawiajmy o Twoim wydarzeniu',
-  ctaHref: '#kontakt',
+  brandText: 'Chłopaki od dźwięku',
+  title: 'Partner techniczny wydarzeń',
+  lead: 'Bierzemy pełną odpowiedzialność za techniczną stronę imprez — od koncepcji po realizację. Obsługujemy projekty miejskie, eventy firmowe i sceny festiwalowe, dzięki czemu Ty skupiasz się na organizacji, a nie na sprzęcie.',
+  ctaText: 'Zapytaj o termin',
+  ctaHref: '#wycena',
   phoneCtaText: 'Zadzwoń',
   phoneCtaHref: `tel:${site.phone}`,
 } as const;
@@ -65,16 +66,28 @@ export const clients = {
 export const services = {
   id: 'co-robimy',
   title: 'Co robimy',
-  intro: 'Zapewniamy kompleksową obsługę tech. wydarzeń:',
   list: [
-    { label: 'nagłośnienie', theme: 'technical' },
-    { label: 'oświetlenie', theme: 'action' },
-    { label: 'scenotechnika', theme: 'festival' },
-    { label: 'multimedia', theme: 'technical' },
-    { label: 'obsługę tech.', theme: 'action' },
-    { label: 'koordynację realizacji', theme: 'festival' },
+    {
+      title: 'Dźwięk i mikrofony',
+      description: 'Czysty głos prelegenta, brak pisków i hałasu.',
+    },
+    {
+      title: 'Światło i oprawa',
+      description: 'Dobrze oświetlona scena i klimat dopasowany do wydarzenia.',
+    },
+    {
+      title: 'Scena i podesty',
+      description: 'Stabilna konstrukcja, prelegent widoczny z każdego miejsca.',
+    },
+    {
+      title: 'Ekrany i wideo',
+      description: 'Czytelne slajdy na sali i płynna transmisja do sieci.',
+    },
+    {
+      title: 'Obsługa na miejscu',
+      description: 'Dbałość o sprzęt i przebieg od montażu do demontażu.',
+    },
   ],
-  closingNote: 'Ty odpowiadasz za wydarzenie. My odpowiadamy za technikę.',
 } as const;
 
 export const audiences = {
@@ -82,21 +95,19 @@ export const audiences = {
   title: 'Dla kogo pracujemy',
   items: [
     {
-      title: 'INSTYTUCJE KULTURY I WYDARZENIA MIEJSKIE + KULTURALNE LOKALNE',
+      title: 'Kultura i samorządy',
       description:
-        'Koncerty, festyny i wydarzenia plenerowe, obchody miejskie, imprezy organizowane przez samorządy oraz instytucje kultury. Wspieramy domy kultury, szkoły, samorządy i organizatorów wydarzeń lokalnych. Od występów teatralnych i przeglądów amatorskich przez dożynki i wydarzenia szkolne aż po koncerty i festyny.',
-      icon: 'institution',
+        'Domy kultury, szkoły i urzędy. Obsługujemy dożynki, festyny miejskie, koncerty plenerowe i lokalne przeglądy artystyczne.',
     },
     {
-      title: 'EVENTY FIRMOWE',
-      description: 'Gale, jubileusze, konferencje, wydarzenia dla pracowników i klientów.',
-      icon: 'business',
+      title: 'Eventy firmowe',
+      description:
+        'Agencje, firmy i marki. Zapewniamy oprawę techniczną konferencji, gal, jubileuszy oraz wydarzeń integracyjnych.',
     },
     {
-      title: 'SCENY FESTIWALOWE',
+      title: 'Festiwale i plenery',
       description:
-        'Sceny tradycyjne, strefy sponsorów, wydarzenia specjalne i realizacje będące częścią większego festiwalu.',
-      icon: 'festival',
+        'Promotorzy i organizatorzy. Tworzymy sceny festiwalowe, strefy sponsorów i wymagające realizacje w przestrzeni otwartej.',
     },
   ],
 } as const;
@@ -107,23 +118,28 @@ export const process = {
   items: [
     {
       step: 1,
-      title: 'Poznajemy wydarzenie',
-      description: 'Rozmawiamy o celu, miejscu i wymaganiach.',
+      title: 'Rozmowa i brief',
+      description: 'Poznajemy cel, miejsce i specyfikę wydarzenia.',
     },
     {
       step: 2,
-      title: 'Przygotowujemy rozwiązanie',
-      description: 'Dobieramy technikę i plan realizacji.',
+      title: 'Dopasowana wycena',
+      description: 'Dobieramy sprzęt i przedstawiamy jasny kosztorys – bez ukrytych opłat.',
     },
     {
       step: 3,
-      title: 'Realizujemy wydarzenie',
-      description: 'Zapewniamy pełną obsługę techniczną.',
+      title: 'Plan i wizja lokalna',
+      description: 'Ustalamy harmonogram, a w razie potrzeby sprawdzamy warunki na miejscu.',
     },
     {
       step: 4,
-      title: 'Zamykamy projekt',
-      description: 'Po zakończeniu sprawnie demontujemy sprzęt i zamykamy wszystkie kwestie organizacyjne.',
+      title: 'Montaż, próby i realizacja',
+      description: 'Przyjeżdżamy z wyprzedzeniem, testujemy wszystko i dbamy o przebieg eventu.',
+    },
+    {
+      step: 5,
+      title: 'Demontaż i podsumowanie',
+      description: 'Sprawnie składamy sprzęt, zostawiamy porządek i domykamy formalności.',
     },
   ],
 } as const;
@@ -131,49 +147,30 @@ export const process = {
 export const portfolio = {
   id: 'realizacje',
   title: 'Wybrane realizacje',
-  socialNote: 'Więcej realizacji znajdziesz na FB / INSTA.',
+  socialPrefix: 'Więcej naszych realizacji i zdjęć z planu znajdziesz na',
+  facebookLabel: 'FB',
+  instagramLabel: 'INSTA',
   items: [
     {
-      title: 'Wydarzenie miejskie – Letni Koncert',
-      category: 'Wydarzenie miejskie',
-      description: 'Plenerowa scena na 800 osób. Nagłośnienie line-array, oświetlenie sceniczne i pełna obsługa techniczna.',
-      tags: ['Line-array', 'Outdoor', 'Live sound'],
-      theme: 'technical',
+      title: 'Plenerowy koncert miejski',
+      category: 'Kultura i samorządy',
+      description:
+        'Scena plenerowa przygotowana na 800 osób. Zapewniliśmy nagłośnienie systemowe, oprawę świetlną oraz pełną obsługę realizatorów.',
+      tags: ['Plener', 'Koncert', 'Nagłośnienie'],
     },
     {
-      title: 'Dom Kultury – Przegląd Amatorski',
-      category: 'Instytucja kultury',
-      description: 'Wielogodzinna obsługa sceniczna dla lokalnych artystów: dźwięk, światło i koordynacja.',
-      tags: ['Institution', 'Coordination', 'Stage'],
-      theme: 'action',
+      title: 'Gala jubileuszowa marki',
+      category: 'Eventy firmowe',
+      description:
+        'Połączenie konferencji i wieczornej gali. Zbudowaliśmy scenę z ekranem LED oraz zadbaliśmy o oprawę oświetleniową i dźwięk.',
+      tags: ['Gala', 'Ekrany LED', 'Oświetlenie'],
     },
     {
-      title: 'Event Firmowy – Gala Jubileuszowa',
-      category: 'Event firmowy',
-      description: 'Konferencja, bankiet i występ sceniczny w jednym. Multimedia, nagłośnienie i oświetlenie.',
-      tags: ['Conference', 'Gala', 'LED'],
-      theme: 'festival',
-    },
-    {
-      title: 'Scena Festiwalowa – Strefa Sponsora',
-      category: 'Scena festiwalowa',
-      description: 'Mała scena w ramach dużego festiwalu. Szybki montaż, pełna obsługa i demontaż.',
-      tags: ['Festival', 'Sponsor zone', 'Fast setup'],
-      theme: 'technical',
-    },
-    {
-      title: 'Koncert Plenerowy – Dzień Miasta',
-      category: 'Wydarzenie miejskie',
-      description: 'Obsługa techniczna koncertu na głównym placu miasta. Dźwięk, światło i backline.',
-      tags: ['City day', 'Concert', 'Backline'],
-      theme: 'action',
-    },
-    {
-      title: 'Festiwal – Scena Główna',
-      category: 'Scena festiwalowa',
-      description: 'Wielogodzinna realizacja na głównej scenie festiwalu. Koordynacja zespołów i sprzętu.',
-      tags: ['Main stage', 'Festival', 'Coordination'],
-      theme: 'festival',
+      title: 'Scena główna festiwalu',
+      category: 'Festiwale i plenery',
+      description:
+        'Obsługa techniczna pełnego line-upu artystów. Sprawna koordynacja zmian na scenie i ciągłość pracy sprzętu bez opóźnień.',
+      tags: ['Festiwal', 'Scena główna', 'Realizacja'],
     },
   ],
 } as const;
@@ -182,61 +179,57 @@ export const about = {
   id: 'o-nas',
   title: 'O nas',
   paragraphs: [
-    'Od X lat wspieramy organizatorów wydarzeń w realizacji projektów o różnej skali – od lokalnych wydarzeń po duże produkcje sceniczne.',
-    'Stawiamy na odpowiedzialność, komunikację i sprawdzone rozwiązania techniczne.',
-    'Na co dzień działamy na terenie województwa lubelskiego, ale obsługujemy wydarzenia również w innych częściach kraju.',
+    'Od 10 lat dostarczamy zaplecze techniczne na wydarzenia każdej skali – od lokalnych spotkań po duże produkcje sceniczne.',
+    'Stawiamy na jasną komunikację, terminowość i niezawodny sprzęt. Bierzemy na siebie całą stronę techniczną, żebyś Ty mógł skupić się na przebiegu eventu.',
+    'Na co dzień działamy w województwie lubelskim, ale realizujemy projekty w całej Polsce.',
+    'Z wieloma domami kultury, samorządami i agencjami współpracujemy cyklicznie, co jest dla nas najlepszym dowodem zaufania.',
   ],
 } as const;
 
 export const cta = {
   id: 'kontakt',
   title: 'Porozmawiajmy o Twoim wydarzeniu',
-  lead: 'Zostaw kontakt i kilka info o wydarzeniu. Odezwiemy się, aby omówić szczegóły i przygotować propozycję.',
-  ctaText: 'Wypełnij formularz wyceny',
+  lead: 'Zostaw kontakt i najważniejsze szczegóły. Odezwiemy się w ciągu 1 dnia roboczego, żeby sprawdzić dostępność terminu i przygotować bezpłatną propozycję.',
+  ctaText: 'Zapytaj o termin i ofertę',
   ctaHref: '#wycena',
   sideNotes: [
     {
       title: 'Wolisz porozmawiać od razu?',
-      text: `Zadzwoń: ${site.phoneDisplay} (Imię i nazwisko)`,
+      text: `Zadzwoń: ${site.phoneDisplay} (Piotr Kaciuczyk – obsługa wydarzeń)`,
       href: `tel:${site.phone}`,
-    },
-    {
-      title: 'Nie lubisz czekać?',
-      text: 'Odpowiadamy sprawnie (w ciągu 1 dnia roboczego).',
-      href: undefined,
     },
   ],
 } as const;
 
 export const quoteForm = {
   id: 'wycena',
-  title: 'Formularz wyceny',
+  title: 'Zapytaj o termin i ofertę',
   email: site.email,
   subject: 'Wycena — Chłopaki od dźwięku',
   template: 'table',
   fields: {
     name: {
       label: 'Imię i nazwisko',
-      placeholder: 'Twoje imię i nazwisko',
+      placeholder: 'np. Jan Kowalski',
       autocomplete: 'name',
     },
     email: {
       label: 'E-mail',
-      placeholder: 'Twój adres e-mail',
+      placeholder: 'np. jan@firma.pl',
       autocomplete: 'email',
     },
     phone: {
-      label: 'Tel.',
-      placeholder: 'Twój numer telefonu',
+      label: 'Telefon',
+      placeholder: 'np. +48 123 456 789',
       autocomplete: 'tel',
     },
     message: {
       label: 'Opowiedz krótko o wydarzeniu',
-      placeholder: 'Rodzaj wydarzenia, termin, lokalizacja, liczba uczestników itp.',
+      placeholder: 'Rodzaj wydarzenia, planowany termin, lokalizacja, szacowana liczba uczestników',
     },
   },
-  consentText: 'Wyrażam zgodę na kontakt w sprawie wyceny.',
-  submitText: 'Wyślij',
+  consentText: 'Wyrażam zgodę na kontakt w celu obsługi zapytania.',
+  submitText: 'Wyślij zapytanie',
   noscriptText: 'Masz wyłączony JavaScript — napisz do nas na',
   successAnchor: '#wycena-sent',
 } as const;
@@ -246,16 +239,39 @@ export const faq = {
   title: 'FAQ',
   items: [
     {
-      question: 'Jak szybko dostanę wycenę?',
-      answer: 'Zazwyczaj odpowiadamy w ciągu 1 dnia roboczego. Wycena zależy od skali, lokalizacji i wymaganej techniki.',
+      question: 'Jak szybko dostaniemy odpowiedź i ofertę?',
+      answer:
+        'Zazwyczaj odpowiadamy w ciągu 1 dnia roboczego. Czas przygotowania propozycji zależy od skali wydarzenia i doboru sprzętu.',
     },
     {
-      question: 'Czy obsługujecie wydarzenia poza województwem lubelskim?',
-      answer: 'Tak. Na co dzień działamy w województwie lubelskim, ale realizujemy wydarzenia w całej Polsce.',
+      question: 'Z jakim wyprzedzeniem najlepiej zarezerwować termin?',
+      answer:
+        'Im wcześniej, tym lepiej — najbardziej oblegane terminy (szczególnie maj–czerwiec, wrzesień i grudzień) rezerwujemy często z kilkumiesięcznym wyprzedzeniem. Jeśli masz już datę wydarzenia, odezwij się jak najszybciej. Planujesz coś „na już”? Napisz lub zadzwoń — jeśli sprzęt i ekipa są wolni, pomożemy.',
     },
     {
-      question: 'Czy możecie zająć się tylko częścią techniczną?',
-      answer: 'Oczywiście. Możemy dostarczyć samo nagłośnienie, światło, multimedia lub pełną obsługę techniczną.',
+      question: 'Od czego zależy cena obsługi technicznej?',
+      answer:
+        'Każdy projekt wyceniamy indywidualnie, aby klient nie płacił za sprzęt, którego nie potrzebuje. Na ostateczny koszt wpływają: skala wydarzenia, zakres potrzebnego sprzętu, czas pracy oraz logistyka.',
+    },
+    {
+      question: 'Co musimy zapewnić po naszej stronie jako organizator?',
+      answer:
+        'Z Waszej strony potrzebujemy jedynie dostępu do zasilania, przygotowanej przestrzeni pod scenę/reżyserkę oraz ustalonego harmonogramu. My przywozimy własny sprzęt i okablowanie, bierzemy na siebie cały montaż, a podczas wydarzenia czuwamy nad realizacją.',
+    },
+    {
+      question: 'Czy wystawiacie faktury VAT?',
+      answer:
+        'Tak, wystawiamy faktury VAT i sprawnie przechodzimy przez formalności wymagane przez firmy, agencje oraz instytucje budżetowe.',
+    },
+    {
+      question: 'Czy możecie zająć się tylko wybraną częścią techniki?',
+      answer:
+        'Tak. Zapewniamy zarówno kompleksową realizację, jak i obsługę pojedynczych stref – np. samego nagłośnienia, oświetlenia czy ekranów LED.',
+    },
+    {
+      question: 'Czy obsługujecie cykliczne wydarzenia i stałe sezony imprezowe?',
+      answer:
+        'Tak. Z wieloma domami kultury i samorządami współpracujemy w trybie ciągłym – obsługując pełne sezony plenerowe, coroczne festiwale czy cykliczne przeglądy artystyczne. Znamy specyfikę pracy instytucji i rozliczeń budżetowych.',
     },
   ],
 } as const;
@@ -263,9 +279,3 @@ export const faq = {
 export const footer = {
   copyright: `© ${site.year} ${site.brand}. Wszystkie prawa zastrzeżone.`,
 } as const;
-
-export const iconMap: Record<string, string> = {
-  institution: '🏛️',
-  business: '💼',
-  festival: '🎪',
-};
