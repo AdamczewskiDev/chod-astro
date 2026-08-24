@@ -33,7 +33,6 @@
 
 export const site = {
   brand: 'Chłopaki od dźwięku',
-  brandShort: 'ChOD',
   baseUrl: 'https://www.chlopakioddzwieku.com',
   phone: '+48722880680',
   phoneDisplay: '+48 722 880 680',

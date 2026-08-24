@@ -1,13 +1,12 @@
 ---
 import Logo from './Logo.astro';
 import ThemeToggle from './ThemeToggle.astro';
-import { site, navigation } from '../data/content';
+import { navigation } from '../data/content';
 ---
 
 <header class="top-bar">
   <div class="container header-inner">
     <Logo />
-    <span class="header-brand" aria-hidden="true">{site.brandShort}</span>
     <button
       type="button"
       class="nav-toggle"
