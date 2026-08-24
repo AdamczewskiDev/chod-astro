@@ -24,7 +24,7 @@
 //   - Zdjęcie poziome (ok. 1200×800) wygląda najlepiej.
 //
 // TELEFONY — sekcja `contacts`
-//   - Każda osoba to jeden blok { name, role, phone, phoneDisplay }
+//   - Każda osoba to jeden blok { name, phone, phoneDisplay }
 //   - Kolejność bloków = kolejność w sekcji „Kontakt”
 //
 // SOCIAL:
@@ -47,13 +47,11 @@ export const site = {
 export const contacts = [
   {
     name: 'Piotr Kaciuczyk',
-    role: 'obsługa wydarzeń',
     phone: '+48722880680',
     phoneDisplay: '+48 722 880 680',
   },
   {
     name: 'Damian Adamczewski',
-    role: 'obsługa wydarzeń',
     phone: '+48796608988',
     phoneDisplay: '+48 796 608 988',
   },

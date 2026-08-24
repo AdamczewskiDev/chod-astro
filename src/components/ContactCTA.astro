@@ -19,9 +19,7 @@ import { contacts, cta } from '../data/content';
             contacts.map((person) => (
               <li class="contact-person">
                 <a class="contact-phone" href={`tel:${person.phone}`}>{person.phoneDisplay}</a>
-                <span class="contact-name">
-                  {person.name} — {person.role}
-                </span>
+                <span class="contact-name">{person.name}</span>
               </li>
             ))
           }
