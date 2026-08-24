@@ -216,7 +216,7 @@ export const portfolio: {
       title: 'Wiosenne wirowanie, Dom Kultury LSM',
       category: 'Domy kultury',
       description:
-        'Koncert pieśni i tańca lubelskiego zespołu ludowego na scenie Domu Kultury LSM. Kapela, wokal i taniec na jednej scenie, więc pilnowaliśmy czystego brzmienia i odsłuchów, raby umilić czas gością na sali.',
+        'Koncert pieśni i tańca lubelskiego zespołu ludowego na scenie Domu Kultury LSM. Kapela, wokal i taniec na jednej scenie, więc pilnowaliśmy czystego brzmienia i odsłuchów, żeby umilić czas gością na sali.',
       image: '/images/realizacje/dom-kultury-lsm.webp',
       tags: ['Dom kultury', 'Koncert', 'Realizacja dźwięku'],
       date: 'kwiecień 2026',
