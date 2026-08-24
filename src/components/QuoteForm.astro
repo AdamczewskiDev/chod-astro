@@ -72,6 +72,16 @@ const nextUrl = `${siteUrl}/${quoteForm.successAnchor}`;
           />
           <p class="field-error" id="q-phone-error" role="alert"></p>
         </div>
+        <div class="field">
+          <label for="q-date">{quoteForm.fields.date.label}</label>
+          <input
+            id="q-date"
+            name="date"
+            type="text"
+            maxlength="60"
+            placeholder={quoteForm.fields.date.placeholder}
+          />
+        </div>
         <div class="field field-full">
           <label for="q-msg">{quoteForm.fields.message.label}</label>
           <textarea

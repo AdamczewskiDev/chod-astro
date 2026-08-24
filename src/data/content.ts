@@ -111,24 +111,28 @@ export const services = {
   title: 'Co robimy',
   list: [
     {
-      title: 'Dźwięk i mikrofony',
-      description: 'Czysty głos prelegenta, brak pisków i hałasu.',
+      title: 'Nagłośnienie i akustyka',
+      description: 'Dźwięk dopasowany do sali i pleneru. Czysty głos przy przemówieniach, pełna moc na koncertach i sprawna obsługa riderów.',
     },
     {
-      title: 'Światło i oprawa',
-      description: 'Dobrze oświetlona scena i klimat dopasowany do wydarzenia.',
+      title: 'Oświetlenie i oprawa',
+      description: 'Oświetlenie sceniczne i architektoniczne. Światło dopasowane do charakteru imprezy — od stonowanych konferencji po dynamiczne koncerty.',
     },
     {
-      title: 'Scena i podesty',
-      description: 'Stabilna konstrukcja, prelegent widoczny z każdego miejsca.',
+      title: 'Sceny i konstrukcje',
+      description: 'Atestowane sceny z zadaszeniem, podesty i stabilne kratownice. Bezpieczne konstrukcje dopasowane do miejsca wydarzenia.',
     },
     {
       title: 'Ekrany i wideo',
-      description: 'Czytelne slajdy na sali i płynna transmisja do sieci.',
+      description: 'Ekrany LED wyraźne nawet w pełnym słońcu, czytelne prezentacje oraz realizacja wideo na żywo i streaming.',
     },
     {
-      title: 'Obsługa na miejscu',
-      description: 'Dbałość o sprzęt i przebieg od montażu do demontażu.',
+      title: 'Obsługa i realizacja',
+      description: 'Ekipa realizatorów na miejscu. Punktualny montaż, czuwanie nad całym przebiegiem imprezy oraz sprawny demontaż.',
+    },
+    {
+      title: 'Zasilanie i okablowanie',
+      description: 'Prąd jest odpowiednio zabezpieczony. Okablowanie sceniczne zgodne z normami i bezpieczeństwem.',
     },
   ],
 } as const;
@@ -257,7 +261,7 @@ export const about = {
 export const cta = {
   id: 'kontakt',
   title: 'Porozmawiajmy o Twoim wydarzeniu',
-  lead: 'Zostaw kontakt i najważniejsze szczegóły. Odezwiemy się w ciągu 1 dnia roboczego, żeby sprawdzić dostępność terminu i przygotować bezpłatną propozycję.',
+  lead: 'Zostaw kontakt i najważniejsze szczegóły. Odezwiemy się w ciągu 1-2 dni roboczych, żeby sprawdzić dostępność terminu i przygotować bezpłatną propozycję.',
   ctaText: 'Zapytaj o termin i ofertę',
   ctaHref: '#wycena',
   contactsTitle: 'Wolisz porozmawiać od razu?',
@@ -285,9 +289,14 @@ export const quoteForm = {
       placeholder: 'np. +48 123 456 789',
       autocomplete: 'tel',
     },
+    // Pole nieobowiązkowe — nie blokuje wysłania formularza.
+    date: {
+      label: 'Planowana data wydarzenia (opcjonalnie)',
+      placeholder: 'np. 12 września 2026 albo wrzesień',
+    },
     message: {
       label: 'Opowiedz krótko o wydarzeniu',
-      placeholder: 'Rodzaj wydarzenia, planowany termin, lokalizacja, szacowana liczba uczestników',
+      placeholder: 'Rodzaj wydarzenia, lokalizacja, szacowana liczba uczestników',
     },
   },
   consentText: 'Wyrażam zgodę na kontakt w celu obsługi zapytania.',
@@ -303,7 +312,7 @@ export const faq = {
     {
       question: 'Jak szybko dostaniemy odpowiedź i ofertę?',
       answer:
-        'Zazwyczaj odpowiadamy w ciągu 1 dnia roboczego. Czas przygotowania propozycji zależy od skali wydarzenia i doboru sprzętu.',
+        'Odpowiadamy w ciągu 1-2 dni roboczych. Czas przygotowania propozycji zależy od skali wydarzenia i doboru sprzętu.',
     },
     {
       question: 'Z jakim wyprzedzeniem najlepiej zarezerwować termin?',

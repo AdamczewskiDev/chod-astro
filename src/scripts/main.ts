@@ -29,5 +29,19 @@ function initNav(): void {
   });
 }
 
+function initClientsMarquee(): void {
+  const marquee = document.querySelector<HTMLElement>('.clients-marquee');
+  if (!marquee) return;
+
+  const pause = () => marquee.classList.add('is-paused');
+  const resume = () => marquee.classList.remove('is-paused');
+
+  marquee.addEventListener('touchstart', pause, { passive: true });
+  // Nasłuch na oknie, bo palec często kończy gest poza karuzelą.
+  window.addEventListener('touchend', resume, { passive: true });
+  window.addEventListener('touchcancel', resume, { passive: true });
+}
+
 initNav();
+initClientsMarquee();
 initQuoteForm();
