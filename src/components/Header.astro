@@ -6,11 +6,23 @@ import { site, navigation } from '../data/content';
 <header class="top-bar">
   <div class="container header-inner">
     <Logo />
-    <nav class="main-nav" aria-label="Menu główne">
+    <a href={`tel:${site.phone}`} class="btn-call" title={`Zadzwoń: ${site.phoneDisplay}`}>
+      <span class="btn-call-text">Zadzwoń</span>
+      <span class="btn-call-phone">{site.phoneDisplay}</span>
+    </a>
+    <button
+      type="button"
+      class="nav-toggle"
+      aria-controls="main-nav"
+      aria-expanded="false"
+      aria-label="Otwórz menu"
+    >
+      <span class="nav-toggle-bar" aria-hidden="true"></span>
+      <span class="nav-toggle-bar" aria-hidden="true"></span>
+      <span class="nav-toggle-bar" aria-hidden="true"></span>
+    </button>
+    <nav class="main-nav" id="main-nav" aria-label="Menu główne" hidden>
       {navigation.map((item) => <a href={item.href}>{item.label}</a>)}
     </nav>
-    <a href={`tel:${site.phone}`} class="btn-call" title="Zadzwoń do nas teraz">
-      Zadzwoń: {site.phoneDisplay}
-    </a>
   </div>
 </header>

@@ -1,39 +1,33 @@
 import { initQuoteForm } from './quote-form';
 
-function initMinimalHeader(): void {
-  const minimalHeader = document.getElementById('header-minimal');
-  const hero = document.getElementById('hero');
-  if (!minimalHeader || !hero) return;
+function initNav(): void {
+  const headerInner = document.querySelector('.header-inner');
+  const toggle = headerInner?.querySelector<HTMLButtonElement>('.nav-toggle');
+  const nav = headerInner?.querySelector<HTMLElement>('#main-nav');
+  if (!headerInner || !toggle || !nav) return;
 
-  const isMobile = () => window.innerWidth < 600;
-
-  const setVisible = (visible: boolean) => {
-    minimalHeader.classList.toggle('visible', visible);
-    if (visible) {
-      minimalHeader.removeAttribute('aria-hidden');
-      minimalHeader.removeAttribute('inert');
-    } else {
-      minimalHeader.setAttribute('aria-hidden', 'true');
-      minimalHeader.setAttribute('inert', '');
-    }
+  const setOpen = (open: boolean) => {
+    headerInner.classList.toggle('is-nav-open', open);
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Zamknij menu' : 'Otwórz menu');
+    nav.hidden = !open;
   };
 
-  const observer = new IntersectionObserver(
-    (entries) => {
-      if (!isMobile()) return;
-      entries.forEach((entry) => setVisible(!entry.isIntersecting));
-    },
-    { threshold: 0.1 },
-  );
-
-  observer.observe(hero);
-
-  const mediaQuery = window.matchMedia('(min-width: 600px)');
-  mediaQuery.addEventListener('change', (e) => {
-    if (e.matches) setVisible(false);
+  toggle.addEventListener('click', () => {
+    setOpen(!headerInner.classList.contains('is-nav-open'));
   });
-  if (mediaQuery.matches) setVisible(false);
+
+  nav.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => setOpen(false));
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && headerInner.classList.contains('is-nav-open')) {
+      setOpen(false);
+      toggle.focus();
+    }
+  });
 }
 
-initMinimalHeader();
+initNav();
 initQuoteForm();
