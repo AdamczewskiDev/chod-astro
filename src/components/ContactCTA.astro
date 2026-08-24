@@ -1,7 +1,5 @@
 ---
-import { cta } from '../data/content';
-
-const hasHref = (note: { href?: string }): note is { href: string } => Boolean(note.href);
+import { contacts, cta } from '../data/content';
 ---
 
 <section id={cta.id} class="container mt-space" aria-labelledby="cta-heading">
@@ -9,26 +7,26 @@ const hasHref = (note: { href?: string }): note is { href: string } => Boolean(n
     <div class="cta-box border-box content-padding">
       <h2 id="cta-heading">{cta.title}</h2>
       <p>{cta.lead}</p>
-      <a href={cta.ctaHref} class="btn-solid" title="Przejdź do formularza wyceny">
+      <a href={cta.ctaHref} class="btn-solid btn-solid--accent-inverse" title="Przejdź do formularza wyceny">
         {cta.ctaText}
       </a>
     </div>
     <aside class="cta-side-notes" aria-label="Szybki kontakt">
-      {
-        cta.sideNotes.map((note) =>
-          hasHref(note) ? (
-            <p class="cta-side-note border-box">
-              <strong>{note.title}</strong>
-              <a href={note.href}>{note.text}</a>
-            </p>
-          ) : (
-            <p class="cta-side-note border-box">
-              <strong>{note.title}</strong>
-              <span>{note.text}</span>
-            </p>
-          ),
-        )
-      }
+      <div class="cta-side-note border-box">
+        <strong>{cta.contactsTitle}</strong>
+        <ul class="contact-list">
+          {
+            contacts.map((person) => (
+              <li class="contact-person">
+                <a class="contact-phone" href={`tel:${person.phone}`}>{person.phoneDisplay}</a>
+                <span class="contact-name">
+                  {person.name} — {person.role}
+                </span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
     </aside>
   </div>
 </section>

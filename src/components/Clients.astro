@@ -13,7 +13,9 @@ import { clients } from '../data/content';
         {
           clients.items.map((client) => (
             <li class="client-card border-box">
-              <img src={client.logo} alt="" loading="lazy" decoding="async" width="96" height="96" />
+              {client.logo ? (
+                <img src={client.logo} alt="" loading="lazy" decoding="async" width="96" height="96" />
+              ) : null}
               <span class="client-name">{client.name}</span>
             </li>
           ))
@@ -23,7 +25,9 @@ import { clients } from '../data/content';
         {
           clients.items.map((client) => (
             <li class="client-card border-box">
-              <img src={client.logo} alt="" loading="lazy" decoding="async" width="96" height="96" />
+              {client.logo ? (
+                <img src={client.logo} alt="" loading="lazy" decoding="async" width="96" height="96" />
+              ) : null}
               <span class="client-name">{client.name}</span>
             </li>
           ))

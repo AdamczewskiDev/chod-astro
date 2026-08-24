@@ -1,14 +1,49 @@
 ---
 import { hero } from '../data/content';
+
+// Łamanie z content.ts (znak nowej linii) zamieniamy na <br>, żeby układ
+// nie przeskakiwał, dopóki nie wczytają się styl i font.
+const brandLines = hero.brandText.split('\n');
 ---
 
 <section id={hero.id} class="container border-box mt-header" aria-labelledby="hero-heading">
   <div class="hero-content">
-    <h1 id="hero-heading" class="hero-brand">{hero.brandText}</h1>
+    <picture class="hero-logo hero-logo--light">
+      <source srcset="/logo-chod-podpis.webp" type="image/webp" />
+      <img
+        src="/logo-chod-podpis.png"
+        alt="Piotr i Damian — Chłopaki od dźwięku"
+        width="1600"
+        height="875"
+        decoding="async"
+        fetchpriority="high"
+      />
+    </picture>
+    <picture class="hero-logo hero-logo--dark">
+      <source srcset="/logo-chod-podpis-dark.webp" type="image/webp" />
+      <img
+        src="/logo-chod-podpis-dark.png"
+        alt=""
+        width="1600"
+        height="875"
+        decoding="async"
+        aria-hidden="true"
+      />
+    </picture>
+    <h1 id="hero-heading" class="hero-brand">
+      {
+        brandLines.map((line, index) => (
+          <>
+            {index > 0 && <br />}
+            {line}
+          </>
+        ))
+      }
+    </h1>
     <p class="hero-tagline">{hero.title}</p>
     <p>{hero.lead}</p>
     <div class="hero-actions">
-      <a href={hero.ctaHref} class="btn-solid" title="Przejdź do formularza">
+      <a href={hero.ctaHref} class="btn-solid btn-solid--accent" title="Przejdź do formularza">
         {hero.ctaText}
       </a>
       <a href={hero.phoneCtaHref} class="btn-solid" title="Zadzwoń do nas teraz">

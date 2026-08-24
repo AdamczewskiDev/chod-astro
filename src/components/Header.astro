@@ -1,15 +1,13 @@
 ---
 import Logo from './Logo.astro';
+import ThemeToggle from './ThemeToggle.astro';
 import { site, navigation } from '../data/content';
 ---
 
 <header class="top-bar">
   <div class="container header-inner">
     <Logo />
-    <a href={`tel:${site.phone}`} class="btn-call" title={`Zadzwoń: ${site.phoneDisplay}`}>
-      <span class="btn-call-text">Zadzwoń</span>
-      <span class="btn-call-phone">{site.phoneDisplay}</span>
-    </a>
+    <span class="header-brand" aria-hidden="true">{site.brandShort}</span>
     <button
       type="button"
       class="nav-toggle"
@@ -24,5 +22,6 @@ import { site, navigation } from '../data/content';
     <nav class="main-nav" id="main-nav" aria-label="Menu główne" hidden>
       {navigation.map((item) => <a href={item.href}>{item.label}</a>)}
     </nav>
+    <ThemeToggle />
   </div>
 </header>

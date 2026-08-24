@@ -1,17 +1,39 @@
 // ─────────────────────────────────────────────────────────────────────────────
-// CENTRALNE MIEJSCE EDYCJI TEKSTÓW I ZAWARTOŚCI STRONY
+// JAK EDYTOWAĆ TREŚĆ STRONY
 //
-// Zmień wartości poniżej, a strona automatycznie się zaktualizuje.
-// Nie musisz edytować komponentów Astro.
+// 1. Zmieniaj TYLKO ten plik: src/data/content.ts
+// 2. Nie ruszaj plików .astro — one tylko wyświetlają to, co tu wpiszesz.
+// 3. Po zmianie zapisz plik. Na localhost strona odświeży się sama.
+// 4. Cudzysłowy zostaw. Jeśli w tekście jest apostrof, użyj ’ albo "tekst".
+// 5. Listy (klienci, usługi, realizacje, FAQ): kopiuj cały blok { ... },
+//    wklej pod spodem i zmień wartości. Żeby usunąć pozycję — skasuj cały blok.
 //
-// TODO dla użytkownika:
-//  - uzupełnij `site.facebook` i `site.instagram` prawdziwymi adresami profili
-//  - uzupełnij `site.facebook` i `site.instagram` prawdziwymi adresami profili
-//  - podmień logotypy w sekcji `clients` na prawdziwe nazwy klientów
+// LOGA — sekcja `clients` („Zaufali nam”)
+//   - Wrzuć plik do: public/images/logos/
+//   - Nazwa bez spacji, np. logo-dom-kultury.png
+//   - Wpisz: { name: 'Dom Kultury LSM', logo: '/images/logos/lsm.webp' }
+//   - Logo nie jest obowiązkowe. Same imię/nazwa też zadziała:
+//     { name: 'Nowa firma' }
+//   - Najlepiej PNG lub WebP, kwadrat, jasne tło, max ~300–400 px.
+//
+// ZDJĘCIA — sekcja `portfolio` („Wybrane realizacje”)
+//   - Wrzuć plik do: public/images/realizacje/
+//   - Dodaj pole image, np.:
+//     image: '/images/realizacje/malta.jpg',
+//   - Bez `image` karta ma czarny placeholder z kategorią.
+//   - Zdjęcie poziome (ok. 1200×800) wygląda najlepiej.
+//
+// TELEFONY — sekcja `contacts`
+//   - Każda osoba to jeden blok { name, role, phone, phoneDisplay }
+//   - Kolejność bloków = kolejność w sekcji „Kontakt”
+//
+// SOCIAL:
+//   - W `site` uzupełnij facebook i instagram pełnym adresem https://...
 // ─────────────────────────────────────────────────────────────────────────────
 
 export const site = {
   brand: 'Chłopaki od dźwięku',
+  brandShort: 'ChOD',
   baseUrl: 'https://www.chlopakioddzwieku.com',
   phone: '+48722880680',
   phoneDisplay: '+48 722 880 680',
@@ -21,6 +43,23 @@ export const site = {
   year: 2026,
 } as const;
 
+// Osoby do kontaktu. Kolejność = kolejność na stronie.
+// `phone` bez spacji (do klikania), `phoneDisplay` tak jak ma się wyświetlać.
+export const contacts = [
+  {
+    name: 'Piotr Kaciuczyk',
+    role: 'obsługa wydarzeń',
+    phone: '+48722880680',
+    phoneDisplay: '+48 722 880 680',
+  },
+  {
+    name: 'Damian Adamczewski',
+    role: 'obsługa wydarzeń',
+    phone: '+48796608988',
+    phoneDisplay: '+48 796 608 988',
+  },
+] as const;
+
 export const meta = {
   title: 'Chłopaki od dźwięku – Partner Techniczny Wydarzeń | Cała Polska',
   description:
@@ -28,7 +67,7 @@ export const meta = {
   ogTitle: 'Chłopaki od dźwięku – Partner Techniczny Wydarzeń',
   ogDescription:
     'Projekty miejskie, eventy firmowe i sceny festiwalowe. Ty skupiasz się na organizacji, my na sprzęcie.',
-  ogImageAlt: 'Partner techniczny wydarzeń: nagłośnienie, światło, scena',
+  ogImageAlt: 'Piotr i Damian — Chłopaki od dźwięku',
 } as const;
 
 export const navigation = [
@@ -41,7 +80,7 @@ export const navigation = [
 
 export const hero = {
   id: 'hero',
-  brandText: 'Chłopaki od dźwięku',
+  brandText: 'Chłopaki\nod dźwięku',
   title: 'Partner techniczny wydarzeń',
   lead: 'Bierzemy pełną odpowiedzialność za techniczną stronę imprez — od koncepcji po realizację. Obsługujemy projekty miejskie, eventy firmowe i sceny festiwalowe, dzięki czemu Ty skupiasz się na organizacji, a nie na sprzęcie.',
   ctaText: 'Zapytaj o termin',
@@ -50,18 +89,25 @@ export const hero = {
   phoneCtaHref: `tel:${site.phone}`,
 } as const;
 
-export const clients = {
+type ClientItem = {
+  name: string;
+  logo?: string;
+};
+
+export const clients: { id: string; title: string; items: ClientItem[] } = {
   id: 'zaufali-nam',
   title: 'Zaufali nam',
   items: [
-    { name: 'Miasto Lublin', logo: '/images/logos/logo-miasto-lublin.png' },
-    { name: 'Dom Kultury LSM', logo: '/images/logos/logo-dom-kultury.png' },
-    { name: 'Festiwal Kulturalny', logo: '/images/logos/logo-festiwal.png' },
-    { name: 'EventPro', logo: '/images/logos/logo-eventpro.png' },
-    { name: 'Scena Miejska', logo: '/images/logos/logo-scena-miejska.png' },
-    { name: 'Lubelska Impreza', logo: '/images/logos/logo-lubelska-impreza.png' },
+    { name: 'Dzielnicowy Dom Kultury Bronowice', logo: '/images/logos/bronowice.webp' },
+    { name: 'Festiwal Country Road', logo: '/images/logos/countryfest.webp' },
+    { name: 'Dom Kultury LSM', logo: '/images/logos/lsm.webp' },
+    { name: 'Malta Festiwal', logo: '/images/logos/malta-festiwal.webp' },
+    { name: 'Miejski Ośrodek Kultury w Świdniku', logo: '/images/logos/mok-swidnik.webp' },
+    { name: 'Sii', logo: '/images/logos/sii.webp' },
+    // Przykład bez loga:
+    // { name: 'Nowa firma' },
   ],
-} as const;
+};
 
 export const services = {
   id: 'co-robimy',
@@ -144,7 +190,25 @@ export const process = {
   ],
 } as const;
 
-export const portfolio = {
+type PortfolioItem = {
+  title: string;
+  category: string;
+  description: string;
+  image?: string;
+  tags: string[];
+  // Data wydarzenia — pokazuje się na dole karty. Pusta = nic się nie wyświetla.
+  // Wpisz jak chcesz, np. 'czerwiec 2026' albo '21–28 czerwca 2026'.
+  date?: string;
+};
+
+export const portfolio: {
+  id: string;
+  title: string;
+  socialPrefix: string;
+  facebookLabel: string;
+  instagramLabel: string;
+  items: PortfolioItem[];
+} = {
   id: 'realizacje',
   title: 'Wybrane realizacje',
   socialPrefix: 'Więcej naszych realizacji i zdjęć z planu znajdziesz na',
@@ -152,28 +216,35 @@ export const portfolio = {
   instagramLabel: 'INSTA',
   items: [
     {
-      title: 'Plenerowy koncert miejski',
-      category: 'Kultura i samorządy',
+      title: 'Wiosenne wirowanie, Dom Kultury LSM',
+      category: 'Domy kultury',
       description:
-        'Scena plenerowa przygotowana na 800 osób. Zapewniliśmy nagłośnienie systemowe, oprawę świetlną oraz pełną obsługę realizatorów.',
-      tags: ['Plener', 'Koncert', 'Nagłośnienie'],
+        'Koncert pieśni i tańca lubelskiego zespołu ludowego na scenie Domu Kultury LSM. Kapela, wokal i taniec na jednej scenie, więc pilnowaliśmy czystego brzmienia i odsłuchów, raby umilić czas gością na sali.',
+      image: '/images/realizacje/dom-kultury-lsm.webp',
+      tags: ['Dom kultury', 'Koncert', 'Realizacja dźwięku'],
+      date: 'kwiecień 2026',
     },
     {
-      title: 'Gala jubileuszowa marki',
-      category: 'Eventy firmowe',
-      description:
-        'Połączenie konferencji i wieczornej gali. Zbudowaliśmy scenę z ekranem LED oraz zadbaliśmy o oprawę oświetleniową i dźwięk.',
-      tags: ['Gala', 'Ekrany LED', 'Oświetlenie'],
-    },
-    {
-      title: 'Scena główna festiwalu',
+      title: 'Malta Festival, Poznań',
       category: 'Festiwale i plenery',
       description:
-        'Obsługa techniczna pełnego line-upu artystów. Sprawna koordynacja zmian na scenie i ciągłość pracy sprzętu bez opóźnień.',
-      tags: ['Festiwal', 'Scena główna', 'Realizacja'],
+        'Jeden z najważniejszych festiwali w Polsce — tydzień teatru, muzyki, kina i wydarzeń plenerowych w kilkudziesięciu miejscach Poznania. Byliśmy tam po stronie dźwięku oraz światła, od montażu do realizacji na żywo.',
+      image: '/images/realizacje/malta-festival.webp',
+      tags: ['Festiwal', 'Plener', 'Nagłośnienie', 'Oświetlenie'],
+      date: 'czerwiec 2026',
     },
+    {
+      title: 'Dni Mełgwi i Dożynki',
+      category: 'Kultura i samorządy',
+      description:
+        'Święto gminy w amfiteatrze w Mełgwi: korowód dożynkowy z orkiestrą dętą, konkurs wieńców i wieczorne koncerty. W tym roku gwiazdą programu był Robert Rozmus z zespołem, przypominając nam najpiękniejsze piosenki Krzysztofa Krawczyka.',
+      image: '/images/realizacje/dozynki-melgiew.webp',
+      tags: ['Dożynki', 'Scena plenerowa', 'Nagłośnienie'],
+      date: 'sierpień 2026',
+    },
+    
   ],
-} as const;
+};
 
 export const about = {
   id: 'o-nas',
@@ -192,13 +263,7 @@ export const cta = {
   lead: 'Zostaw kontakt i najważniejsze szczegóły. Odezwiemy się w ciągu 1 dnia roboczego, żeby sprawdzić dostępność terminu i przygotować bezpłatną propozycję.',
   ctaText: 'Zapytaj o termin i ofertę',
   ctaHref: '#wycena',
-  sideNotes: [
-    {
-      title: 'Wolisz porozmawiać od razu?',
-      text: `Zadzwoń: ${site.phoneDisplay} (Piotr Kaciuczyk – obsługa wydarzeń)`,
-      href: `tel:${site.phone}`,
-    },
-  ],
+  contactsTitle: 'Wolisz porozmawiać od razu?',
 } as const;
 
 export const quoteForm = {

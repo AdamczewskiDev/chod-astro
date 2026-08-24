@@ -11,8 +11,12 @@ import { site, portfolio } from '../data/content';
     {
       portfolio.items.map((item) => (
         <article class="portfolio-card border-box">
-          <div class="portfolio-thumb" aria-hidden="true">
-            <span class="portfolio-thumb-label">{item.category}</span>
+          <div class="portfolio-thumb">
+            {item.image ? (
+              <img src={item.image} alt={item.title} loading="lazy" decoding="async" />
+            ) : (
+              <span class="portfolio-thumb-label" aria-hidden="true">{item.category}</span>
+            )}
           </div>
           <div class="content-padding">
             <span class="portfolio-category">{item.category}</span>
@@ -23,12 +27,14 @@ import { site, portfolio } from '../data/content';
                 <li>{tag}</li>
               ))}
             </ul>
+            {item.date ? <p class="portfolio-date">{item.date}</p> : null}
           </div>
         </article>
       ))
     }
   </div>
 
+  {/* Tymczasowo ukryte — wróci, gdy będą linki do FB i Instagrama.
   <p class="portfolio-social-note text-center mt-space">
     {portfolio.socialPrefix}{' '}
     {
@@ -51,4 +57,5 @@ import { site, portfolio } from '../data/content';
       )
     }
   </p>
+  */}
 </section>
