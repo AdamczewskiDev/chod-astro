@@ -264,7 +264,7 @@ export const cta = {
   lead: 'Zostaw kontakt i najważniejsze szczegóły. Odezwiemy się w ciągu 1-2 dni roboczych, żeby sprawdzić dostępność terminu i przygotować bezpłatną propozycję.',
   ctaText: 'Zapytaj o termin i ofertę',
   ctaHref: '#wycena',
-  contactsTitle: 'Wolisz porozmawiać od razu?',
+  contactsTitle: 'Wolisz porozmawiać od razu? Zadzwoń!',
 } as const;
 
 export const quoteForm = {
