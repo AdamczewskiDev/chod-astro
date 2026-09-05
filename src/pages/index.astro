@@ -2,7 +2,8 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Hero from '../components/Hero.astro';
-import Clients from '../components/Clients.astro';
+// Tymczasowo wyłączone: sekcja nie idzie do HTML, więc nie indeksuje nazw i logotypów.
+// import Clients from '../components/Clients.astro';
 import Services from '../components/Services.astro';
 import Audiences from '../components/Audiences.astro';
 import Process from '../components/Process.astro';
@@ -21,7 +22,7 @@ import Footer from '../components/Footer.astro';
 
   <main id="main" tabindex="-1">
     <Hero />
-    <Clients />
+    {/* <Clients /> */}
     <Services />
     <Audiences />
     <Process />
