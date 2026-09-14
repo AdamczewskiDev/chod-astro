@@ -1,5 +1,10 @@
 const API_ENDPOINT = '/api/quote';
 const CONTACT_EMAIL = 'damian@chlopakioddzwieku.com';
+const FORMSUBMIT_TO = 'damian@chlopakioddzwieku.com';
+const FORMSUBMIT_CC = 'piotr@chlopakioddzwieku.com';
+const FORMSUBMIT_SUBJECT = 'Wycena — Chłopaki od dźwięku';
+const FORMSUBMIT_BLACKLIST =
+  'dog harness,caredogbest,viagra,casino,crypto,bitcoin,seo service,make money,click here,free trial,weight loss';
 
 declare global {
   interface Window {
@@ -262,40 +267,91 @@ export function initQuoteForm(): void {
     if (submitButton) submitButton.disabled = true;
 
     try {
-      const response = await fetch(API_ENDPOINT, {
+      // 1) Server weryfikuje Turnstile (secret nie wychodzi do przeglądarki).
+      const verifyResponse = await fetch(API_ENDPOINT, {
         method: 'POST',
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          turnstileToken,
-          name: nameInput?.value.trim() ?? '',
-          email,
-          phone: phoneInput?.value.trim() ?? '',
-          date: dateInput?.value.trim() ?? '',
-          message: messageInput?.value.trim() ?? '',
-          consent: consentInput?.checked ? 'on' : '',
-        }),
+        body: JSON.stringify({ turnstileToken }),
       });
 
-      const data = (await response.json().catch(() => null)) as
-        | { ok?: boolean; error?: string }
+      const verifyData = (await verifyResponse.json().catch(() => null)) as
+        | { ok?: boolean; error?: string; skipSubmit?: boolean }
         | null;
 
-      if (!response.ok || !data?.ok) {
-        if (data?.error === 'turnstile_failed' || data?.error === 'missing_turnstile') {
+      if (!verifyResponse.ok || !verifyData?.ok) {
+        if (verifyData?.error === 'turnstile_failed' || verifyData?.error === 'missing_turnstile') {
           if (turnstileError) turnstileError.textContent = MESSAGES.turnstileFailed;
           resetTurnstile();
           throw new Error('turnstile');
         }
-        throw new Error(data?.error || `HTTP ${response.status}`);
+        const isLocal =
+          location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+        if (isLocal && verifyResponse.status === 404) {
+          throw new Error('local_api');
+        }
+        throw new Error(verifyData?.error || `HTTP ${verifyResponse.status}`);
+      }
+
+      if (verifyData.skipSubmit) {
+        if (status) showSuccess(status, form);
+        return;
+      }
+
+      // 2) Mail idzie z przeglądarki → FormSubmit (aktywacja + dostarczanie działa niezawodniej niż z Workera).
+      const payload = new FormData();
+      payload.append('name', nameInput?.value.trim() ?? '');
+      payload.append('email', email);
+      payload.append('phone', phoneInput?.value.trim() ?? '');
+      payload.append('message', messageInput?.value.trim() ?? '');
+      payload.append('consent', consentInput?.checked ? 'on' : '');
+      const date = dateInput?.value.trim() ?? '';
+      if (date) payload.append('date', date);
+      payload.append('_subject', FORMSUBMIT_SUBJECT);
+      payload.append('_template', 'table');
+      payload.append('_cc', FORMSUBMIT_CC);
+      payload.append('_blacklist', FORMSUBMIT_BLACKLIST);
+      payload.append('_replyto', email);
+      payload.append('_captcha', 'false');
+
+      const sendResponse = await fetch(`https://formsubmit.co/ajax/${FORMSUBMIT_TO}`, {
+        method: 'POST',
+        headers: { Accept: 'application/json' },
+        body: payload,
+      });
+
+      const sendData = (await sendResponse.json().catch(() => null)) as
+        | { success?: string | boolean; message?: string }
+        | null;
+
+      const sendOk =
+        sendResponse.ok && (sendData?.success === true || sendData?.success === 'true');
+
+      if (!sendOk) {
+        // Pierwsza wysyłka: FormSubmit wymaga kliknięcia w mail aktywacyjny.
+        const needsActivation =
+          typeof sendData?.message === 'string' &&
+          /confirm|activat|verify|potwierd/i.test(sendData.message);
+
+        if (needsActivation) {
+          throw new Error('activation');
+        }
+        throw new Error('send_failed');
       }
 
       if (status) showSuccess(status, form);
     } catch (error) {
       if (status && !(error instanceof Error && error.message === 'turnstile')) {
-        status.textContent = MESSAGES.error;
+        if (error instanceof Error && error.message === 'activation') {
+          status.textContent = `Sprawdź skrzynkę ${CONTACT_EMAIL} (także spam) i kliknij link aktywacyjny FormSubmit, potem wyślij formularz ponownie.`;
+        } else if (error instanceof Error && error.message === 'local_api') {
+          status.textContent =
+            'Lokalnie brak /api/quote — zrestartuj `npm run dev` (middleware Turnstile) albo użyj `npm run dev:cf`.';
+        } else {
+          status.textContent = MESSAGES.error;
+        }
         status.classList.remove('form-status--success');
         status.classList.add('form-status--error');
         status.scrollIntoView({ behavior: 'smooth', block: 'nearest' });

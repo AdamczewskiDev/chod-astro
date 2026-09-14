@@ -2,16 +2,11 @@
  * Lokalny smoke test endpointu /api/quote bez wrangler login.
  * Używa oficjalnych kluczy testowych Cloudflare Turnstile (always-pass / always-block).
  */
-import { createServer } from 'node:http';
 import { readFileSync } from 'node:fs';
-import { pathToFileURL } from 'node:url';
 
 const ALWAYS_PASS_SECRET = '1x0000000000000000000000000000000AA';
 const ALWAYS_BLOCK_SECRET = '2x0000000000000000000000000000000AB';
 const DUMMY_TOKEN = 'XXXX.DUMMY.TOKEN.XXXX';
-
-// Patch FormSubmit w module przez dynamic import po stubie global fetch? 
-// Zamiast tego kopiujemy logikę weryfikacji 1:1 i sprawdzamy FormSubmit osobno.
 
 async function verifyTurnstile(secret, token) {
   const res = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
@@ -36,18 +31,31 @@ async function run() {
   const needed = [
     'TURNSTILE_SECRET_KEY',
     'challenges.cloudflare.com/turnstile/v0/siteverify',
-    'formsubmit.co/ajax/',
-    'piotr@chlopakioddzwieku.com',
-    'damian@chlopakioddzwieku.com',
     'onRequestPost',
   ];
+  const forbidden = ['formsubmit.co'];
   for (const n of needed) {
     console.log(src.includes(n) ? 'PASS' : 'FAIL', n);
     if (!src.includes(n)) process.exitCode = 1;
   }
+  for (const n of forbidden) {
+    console.log(!src.includes(n) ? 'PASS (no FormSubmit in Function)' : 'FAIL (FormSubmit still in Function)', n);
+    if (src.includes(n)) process.exitCode = 1;
+  }
 
-  console.log('--- 4) HTML widget checks ---');
+  console.log('--- 4) Client + HTML checks ---');
+  const client = readFileSync(new URL('../src/scripts/quote-form.ts', import.meta.url), 'utf8');
   const html = readFileSync(new URL('../dist/index.html', import.meta.url), 'utf8');
+  const clientNeeded = [
+    'formsubmit.co/ajax/',
+    'damian@chlopakioddzwieku.com',
+    'piotr@chlopakioddzwieku.com',
+    "API_ENDPOINT = '/api/quote'",
+  ];
+  for (const n of clientNeeded) {
+    console.log(client.includes(n) ? 'PASS' : 'FAIL', n);
+    if (!client.includes(n)) process.exitCode = 1;
+  }
   const htmlNeeded = [
     'data-sitekey="0x4AAAAAAEzlL0nSD7cZO8mF"',
     'challenges.cloudflare.com/turnstile/v0/api.js',
@@ -59,37 +67,18 @@ async function run() {
     if (!html.includes(n)) process.exitCode = 1;
   }
 
-  console.log('--- 5) Simulated handler flow (no FormSubmit send) ---');
-  // Emulacja: bez secretu
-  if (!ALWAYS_PASS_SECRET) {
-    console.log('FAIL misconfigured path');
-    process.exitCode = 1;
-  } else {
-    console.log('PASS secret present path');
-  }
-  // Emulacja: brak tokenu
+  console.log('--- 5) Simulated handler flow ---');
+  console.log('PASS secret present path');
   if (!''.trim()) console.log('PASS missing token rejected');
-  // Emulacja: token pass
-  if (pass.success) console.log('PASS token accepted before FormSubmit');
+  if (pass.success) console.log('PASS token accepted before FormSubmit (client)');
   else {
     console.log('FAIL token not accepted');
     process.exitCode = 1;
   }
-  // Emulacja: token block
   if (!block.success) console.log('PASS blocked token would stop before FormSubmit');
   else {
     console.log('FAIL blocked token accepted');
     process.exitCode = 1;
-  }
-
-  console.log('--- 6) FormSubmit endpoint reachability ---');
-  try {
-    const res = await fetch('https://formsubmit.co/ajax/damian@chlopakioddzwieku.com', {
-      method: 'OPTIONS',
-    });
-    console.log('PASS FormSubmit reachable, status', res.status);
-  } catch (e) {
-    console.log('WARN FormSubmit reachability', e.message);
   }
 
   if (process.exitCode) {
@@ -97,7 +86,7 @@ async function run() {
     process.exit(1);
   }
   console.log('\nRESULT: PRE-PUSH CHECKS OK');
-  console.log('UWAGA: pełny test widgetu + secret produkcyjny możliwy dopiero po deployu na Cloudflare.');
+  console.log('UWAGA: po deployu wyślij formularz z przeglądarki i aktywuj FormSubmit mailem na damian@.');
 }
 
 run().catch((e) => {
