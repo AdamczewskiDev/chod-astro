@@ -84,7 +84,7 @@ async function run() {
 
   console.log('--- 6) FormSubmit endpoint reachability ---');
   try {
-    const res = await fetch('https://formsubmit.co/ajax/piotr@chlopakioddzwieku.com', {
+    const res = await fetch('https://formsubmit.co/ajax/damian@chlopakioddzwieku.com', {
       method: 'OPTIONS',
     });
     console.log('PASS FormSubmit reachable, status', res.status);

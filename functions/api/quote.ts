@@ -24,8 +24,8 @@ type PagesContext = {
   env: Env;
 };
 
-const FORMSUBMIT_TO = 'piotr@chlopakioddzwieku.com';
-const FORMSUBMIT_CC = 'damian@chlopakioddzwieku.com';
+const FORMSUBMIT_TO = 'damian@chlopakioddzwieku.com';
+const FORMSUBMIT_CC = 'piotr@chlopakioddzwieku.com';
 const SUBJECT = 'Wycena — Chłopaki od dźwięku';
 const BLACKLIST =
   'dog harness,caredogbest,viagra,casino,crypto,bitcoin,seo service,make money,click here,free trial,weight loss';

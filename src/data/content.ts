@@ -36,7 +36,7 @@ export const site = {
   baseUrl: 'https://www.chlopakioddzwieku.com',
   phone: '+48722880680',
   phoneDisplay: '+48 722 880 680',
-  email: 'piotr@chlopakioddzwieku.com',
+  email: 'damian@chlopakioddzwieku.com',
   facebook: '',
   instagram: '',
   year: 2026,
@@ -274,8 +274,8 @@ export const quoteForm = {
   title: 'Zapytaj o termin i ofertę',
   // FormSubmit: główny odbiorca w URL; CC dostaje kopię.
   // Przy pierwszej wysyłce na nowy adres FormSubmit wysyła mail aktywacyjny — trzeba kliknąć.
-  email: 'piotr@chlopakioddzwieku.com',
-  cc: 'damian@chlopakioddzwieku.com',
+  email: 'damian@chlopakioddzwieku.com',
+  cc: 'piotr@chlopakioddzwieku.com',
   subject: 'Wycena — Chłopaki od dźwięku',
   template: 'table',
   // Frazy odrzucane po stronie FormSubmit (spam). Max ~20.

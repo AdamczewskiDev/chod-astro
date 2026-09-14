@@ -1,5 +1,5 @@
 const API_ENDPOINT = '/api/quote';
-const CONTACT_EMAIL = 'piotr@chlopakioddzwieku.com';
+const CONTACT_EMAIL = 'damian@chlopakioddzwieku.com';
 
 declare global {
   interface Window {
