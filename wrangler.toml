@@ -1,0 +1,6 @@
+# Cloudflare Pages — Functions działają obok statycznego dist/
+# Secret Turnstile: Settings → Environment variables → TURNSTILE_SECRET_KEY
+# (Production + Preview)
+name = "chod-astro"
+compatibility_date = "2025-08-01"
+pages_build_output_dir = "dist"

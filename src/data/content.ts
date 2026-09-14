@@ -24,7 +24,7 @@
 //   - Zdjęcie poziome (ok. 1200×800) wygląda najlepiej.
 //
 // TELEFONY — sekcja `contacts`
-//   - Każda osoba to jeden blok { name, phone, phoneDisplay }
+//   - Każda osoba to jeden blok { name, phone, phoneDisplay, email }
 //   - Kolejność bloków = kolejność w sekcji „Kontakt”
 //
 // SOCIAL:
@@ -36,7 +36,7 @@ export const site = {
   baseUrl: 'https://www.chlopakioddzwieku.com',
   phone: '+48722880680',
   phoneDisplay: '+48 722 880 680',
-  email: 'chlopakioddzwieku@gmail.com',
+  email: 'piotr@chlopakioddzwieku.com',
   facebook: '',
   instagram: '',
   year: 2026,
@@ -49,11 +49,13 @@ export const contacts = [
     name: 'Piotr Kaciuczyk',
     phone: '+48722880680',
     phoneDisplay: '+48 722 880 680',
+    email: 'piotr@chlopakioddzwieku.com',
   },
   {
     name: 'Damian Adamczewski',
     phone: '+48796608988',
     phoneDisplay: '+48 796 608 988',
+    email: 'damian@chlopakioddzwieku.com',
   },
 ] as const;
 
@@ -220,7 +222,7 @@ export const portfolio: {
       title: 'Wiosenne wirowanie, Dom Kultury LSM',
       category: 'Domy kultury',
       description:
-        'Koncert pieśni i tańca lubelskiego zespołu ludowego na scenie Domu Kultury LSM. Kapela, wokal i taniec na jednej scenie, więc pilnowaliśmy czystego brzmienia i odsłuchów, żeby umilić czas gością na sali.',
+        'Koncert pieśni i tańca lubelskiego zespołu ludowego na scenie Domu Kultury LSM. Kapela, wokal i taniec na jednej scenie, więc pilnowaliśmy czystego brzmienia i odsłuchów, żeby umilić czas gościom na sali.',
       image: '/images/realizacje/dom-kultury-lsm.webp',
       tags: ['Dom kultury', 'Koncert', 'Realizacja dźwięku'],
       date: 'kwiecień 2026',
@@ -270,9 +272,15 @@ export const cta = {
 export const quoteForm = {
   id: 'wycena',
   title: 'Zapytaj o termin i ofertę',
-  email: site.email,
+  // FormSubmit: główny odbiorca w URL; CC dostaje kopię.
+  // Przy pierwszej wysyłce na nowy adres FormSubmit wysyła mail aktywacyjny — trzeba kliknąć.
+  email: 'piotr@chlopakioddzwieku.com',
+  cc: 'damian@chlopakioddzwieku.com',
   subject: 'Wycena — Chłopaki od dźwięku',
   template: 'table',
+  // Frazy odrzucane po stronie FormSubmit (spam). Max ~20.
+  blacklist:
+    'dog harness,caredogbest,viagra,casino,crypto,bitcoin,seo service,make money,click here,free trial,weight loss',
   fields: {
     name: {
       label: 'Imię i nazwisko',
@@ -303,6 +311,8 @@ export const quoteForm = {
   submitText: 'Wyślij zapytanie',
   noscriptText: 'Masz wyłączony JavaScript — napisz do nas na',
   successAnchor: '#wycena-sent',
+  // Cloudflare Turnstile — site key jest publiczny; secret tylko w Pages (TURNSTILE_SECRET_KEY).
+  turnstileSiteKey: '0x4AAAAAAEzlL0nSD7cZO8mF',
 } as const;
 
 export const faq = {

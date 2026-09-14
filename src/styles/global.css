@@ -18,10 +18,10 @@
   --cta-text: var(--surface);
   --cta-border: var(--ink);
   --highlight: var(--ink);
-  --state-error: var(--ink);
-  --state-error-text: var(--ink);
-  --state-error-bg: var(--surface);
-  --state-error-border: var(--ink);
+  --state-error: #c62828;
+  --state-error-text: #c62828;
+  --state-error-bg: #fdecea;
+  --state-error-border: #c62828;
 
   /* Para dopełniająca: identyczne S i L, odcień odwrócony o 180° (214° / 34°). */
   --accent-blue: #1166d4;
@@ -82,10 +82,10 @@
   --cta-text: var(--paper);
   --cta-border: var(--ink);
   --highlight: var(--ink);
-  --state-error: var(--ink);
-  --state-error-text: var(--ink);
-  --state-error-bg: var(--paper);
-  --state-error-border: var(--ink);
+  --state-error: #ef9a9a;
+  --state-error-text: #ef9a9a;
+  --state-error-bg: #3a1515;
+  --state-error-border: #ef9a9a;
 
   /* Jaśniejsze warianty, żeby były czytelne na ciemnym tle. */
   --accent-blue: #4a94f0;
@@ -612,6 +612,21 @@ a:hover {
 
 .quote-form .field-invalid {
   border-color: var(--state-error-border) !important;
+  background-color: var(--state-error-bg);
+}
+
+.quote-form .checkbox .field-invalid {
+  outline: 2px solid var(--state-error-border);
+  outline-offset: 2px;
+  background-color: transparent;
+}
+
+.turnstile-field {
+  min-height: 70px;
+}
+
+.turnstile-field .cf-turnstile {
+  margin-top: .25rem;
 }
 
 .form-status--error {
@@ -1126,6 +1141,12 @@ a:hover {
   font-size: 1.05rem;
   line-height: 1.3;
   white-space: nowrap;
+}
+
+.contact-email {
+  font-size: .95rem;
+  line-height: 1.3;
+  word-break: break-all;
 }
 
 .contact-name {

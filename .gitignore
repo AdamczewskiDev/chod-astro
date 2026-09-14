@@ -1,9 +1,11 @@
 node_modules/
 dist/
 .astro/
+.wrangler/
 .DS_Store
 .env
 .env.*
+.dev.vars
 .agents/
 _bmad/
 _bmad-output/

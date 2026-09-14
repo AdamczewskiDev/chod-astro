@@ -1,8 +1,5 @@
 ---
-import { site, quoteForm } from '../data/content';
-
-const siteUrl = site.baseUrl;
-const nextUrl = `${siteUrl}/${quoteForm.successAnchor}`;
+import { quoteForm } from '../data/content';
 ---
 
 <section id={quoteForm.id} class="container border-box mt-space" aria-labelledby="wycena-heading">
@@ -14,13 +11,11 @@ const nextUrl = `${siteUrl}/${quoteForm.successAnchor}`;
       id="quote-form"
       class="quote-form"
       method="post"
-      action={`https://formsubmit.co/ajax/${quoteForm.email}`}
+      action="/api/quote"
       novalidate
     >
       <div class="form-grid">
-        <input type="hidden" name="_subject" value={quoteForm.subject} />
-        <input type="hidden" name="_template" value={quoteForm.template} />
-        <input type="hidden" name="_next" id="q-next" value={nextUrl} />
+        {/* Honeypot FormSubmit / lokalny — boty, które to wypełnią, są cicho odrzucane. */}
         <input
           type="text"
           name="_honey"
@@ -29,8 +24,16 @@ const nextUrl = `${siteUrl}/${quoteForm.successAnchor}`;
           class="sr-only"
           aria-hidden="true"
         />
-
-        <input type="hidden" name="_replyto" id="q-replyto" value="" />
+        {/* Drugi honeypot (tylko nasza walidacja) — łapie boty omijające _honey. */}
+        <input
+          type="text"
+          name="website"
+          id="q-website"
+          tabindex="-1"
+          autocomplete="off"
+          class="sr-only"
+          aria-hidden="true"
+        />
 
         <div class="field">
           <label for="q-name">{quoteForm.fields.name.label}</label>
@@ -105,6 +108,16 @@ const nextUrl = `${siteUrl}/${quoteForm.successAnchor}`;
           </label>
           <p class="field-error" id="q-consent-error" role="alert"></p>
         </div>
+        <div class="field field-full turnstile-field">
+          <div
+            id="cf-turnstile"
+            class="cf-turnstile"
+            data-sitekey={quoteForm.turnstileSiteKey}
+            data-theme="auto"
+            data-language="pl"
+          ></div>
+          <p class="field-error" id="q-turnstile-error" role="alert"></p>
+        </div>
         <div class="field field-full">
           <button class="btn-solid" type="submit">{quoteForm.submitText}</button>
           <p class="form-hint" id="quote-status" role="status" aria-live="polite"></p>
@@ -119,3 +132,5 @@ const nextUrl = `${siteUrl}/${quoteForm.successAnchor}`;
     </form>
   </div>
 </section>
+
+<script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
